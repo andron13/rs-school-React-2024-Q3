@@ -1,13 +1,40 @@
-import { useState } from 'react'
+import { Component, ReactNode } from "react";
 
-function App() {
-  const [count, setCount] = useState(0)
+import Footer from "§entities/Footer/Footer.tsx";
+import Header from "§widgets/Header";
+import MainSection from "§widgets/MainSection";
 
-  return (
-      <div className="flex flex-col min-h-screen">
-          React
-      </div>
-  )
+interface AppProps {
+  component?: ReactNode;
 }
 
-export default App
+interface AppState {
+  searchString: string;
+}
+
+class App extends Component<AppProps, AppState> {
+  constructor(props: AppProps) {
+    super(props);
+    const savedSearchString = this.getLocalStorage("searchValue") || "";
+    this.state = {
+      searchString: savedSearchString,
+    };
+  }
+  handleSearchClick = (searchValue: string) => {
+    this.setState({ searchString: searchValue });
+  };
+  getLocalStorage = (key: string): string | null => {
+    return localStorage.getItem(key);
+  };
+  render() {
+    return (
+      <div className="flex flex-col min-h-screen">
+        <Header onSearchClick={this.handleSearchClick} />
+        <MainSection searchString={this.state.searchString} />
+        <Footer />
+      </div>
+    );
+  }
+}
+
+export default App;
