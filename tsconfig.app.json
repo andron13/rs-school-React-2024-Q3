@@ -31,7 +31,7 @@
       "§entities/*": ["src/entities/*"],
       "§shared/*": ["src/shared/*"],
       "§features/*": ["src/features/*"],
-      "§widgets/*": ["src/widgets/*"]
+      "§widgets/*": ["src/widgets/*"],
     }
   },
   "include": [
