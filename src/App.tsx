@@ -1,40 +1,26 @@
-import { Component, ReactNode } from "react";
+import { useState, useEffect, FC } from "react";
 
-import Footer from "§entities/Footer/Footer.tsx";
-import Header from "§widgets/Header";
-import MainSection from "§widgets/MainSection";
+import { Footer } from "§entities/Footer";
+import { Header } from "§widgets/Header";
+import { MainSection } from "§widgets/MainSection";
 
-interface AppProps {
-  component?: ReactNode;
-}
+export const App: FC = () => {
+  const [searchString, setSearchString] = useState<string>("");
 
-interface AppState {
-  searchString: string;
-}
+  useEffect(() => {
+    const savedSearchString = localStorage.getItem("searchValue") || "";
+    setSearchString(savedSearchString);
+  }, []);
 
-class App extends Component<AppProps, AppState> {
-  constructor(props: AppProps) {
-    super(props);
-    const savedSearchString = this.getLocalStorage("searchValue") || "";
-    this.state = {
-      searchString: savedSearchString,
-    };
-  }
-  handleSearchClick = (searchValue: string) => {
-    this.setState({ searchString: searchValue });
+  const handleSearchClick = (searchValue: string) => {
+    setSearchString(searchValue);
   };
-  getLocalStorage = (key: string): string | null => {
-    return localStorage.getItem(key);
-  };
-  render() {
-    return (
-      <div className="flex flex-col min-h-screen">
-        <Header onSearchClick={this.handleSearchClick} />
-        <MainSection searchString={this.state.searchString} />
-        <Footer />
-      </div>
-    );
-  }
-}
 
-export default App;
+  return (
+    <div className="flex flex-col min-h-screen">
+      <Header onSearchClick={handleSearchClick} />
+      <MainSection searchString={searchString} />
+      <Footer />
+    </div>
+  );
+};

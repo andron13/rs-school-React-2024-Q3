@@ -1,3 +1,1 @@
-import CharacterList from "./CharacterList.tsx";
-
-export default CharacterList;
+export { CharacterList } from "./CharacterList.tsx";

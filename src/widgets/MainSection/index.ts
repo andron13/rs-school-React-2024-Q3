@@ -1,3 +1,1 @@
-import MainSection from "./MainSection.tsx";
-
-export default MainSection;
+export { MainSection } from "./MainSection.tsx";

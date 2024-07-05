@@ -1,3 +1,1 @@
-import NotFoundSection from "./NotFoundPage.tsx";
-
-export default NotFoundSection;
+export { NotFoundSection } from "./NotFoundPage.tsx";

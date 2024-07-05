@@ -1,3 +1,1 @@
-import SearchSection from "./SearchSection.tsx";
-
-export default SearchSection;
+export { SearchSection } from "./SearchSection.tsx";

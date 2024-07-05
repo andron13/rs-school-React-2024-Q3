@@ -1,3 +1,1 @@
-import CharacterItem from "./CharacterItem.tsx";
-
-export default CharacterItem;
+export { CharacterItem } from "./CharacterItem.tsx";

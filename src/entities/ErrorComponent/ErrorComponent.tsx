@@ -1,13 +1,9 @@
-import { Component } from "react";
+import { FC, useEffect } from "react";
 
-class ErrorComponent extends Component {
-  componentDidMount() {
+export const ErrorComponent: FC = () => {
+  useEffect(() => {
     throw new Error("This is a test error!");
-  }
+  }, []);
 
-  render() {
-    return <div>Something went wrong!</div>;
-  }
-}
-
-export default ErrorComponent;
+  return <div>Something went wrong!</div>;
+};
