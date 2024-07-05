@@ -1,26 +1,14 @@
-import { useState, useEffect, FC } from "react";
+import { FC } from "react";
+import { Route, Routes } from "react-router-dom";
 
-import { Footer } from "§entities/Footer";
-import { Header } from "§widgets/Header";
-import { MainSection } from "§widgets/MainSection";
+import { Frontpage } from "§pages/Frontpage";
+import { NotFoundSection } from "§pages/NotFoundSearchPage";
 
 export const App: FC = () => {
-  const [searchString, setSearchString] = useState<string>("");
-
-  useEffect(() => {
-    const savedSearchString = localStorage.getItem("searchValue") || "";
-    setSearchString(savedSearchString);
-  }, []);
-
-  const handleSearchClick = (searchValue: string) => {
-    setSearchString(searchValue);
-  };
-
   return (
-    <div className="flex flex-col min-h-screen">
-      <Header onSearchClick={handleSearchClick} />
-      <MainSection searchString={searchString} />
-      <Footer />
-    </div>
+    <Routes>
+      <Route path="/" element={<Frontpage />} />
+      <Route path="*" element={<NotFoundSection />} />
+    </Routes>
   );
 };

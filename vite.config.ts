@@ -13,6 +13,7 @@ export default defineConfig({
       { find: "§features", replacement: resolve(__dirname, "./src/features") },
       { find: "§widgets", replacement: resolve(__dirname, "./src/widgets") },
       { find: "§shared", replacement: resolve(__dirname, "./src/shared") },
+      { find: "§pages", replacement: resolve(__dirname, "./src/pages") },
     ],
   },
 });

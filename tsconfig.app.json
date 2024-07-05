@@ -32,6 +32,7 @@
       "§shared/*": ["src/shared/*"],
       "§features/*": ["src/features/*"],
       "§widgets/*": ["src/widgets/*"],
+      "§pages/*": ["src/pages/*"],
     }
   },
   "include": [

@@ -3,8 +3,8 @@ import { FC, ReactNode } from "react";
 import { useFetchCharacters } from "./hook";
 import { DataSection } from "./ui";
 
-import { ErrorSection } from "§entities/ErrorSection.tsx";
-import { LoadingSection } from "§entities/LoadingSection.tsx";
+import { ErrorSection } from "§entities/ErrorSection";
+import { LoadingSpinner } from "§entities/LoadingSpinner";
 
 interface MainSectionProps {
   searchString: string;
@@ -16,7 +16,7 @@ export const MainSection: FC<MainSectionProps> = ({ searchString }) => {
   if (error) {
     content = <ErrorSection error={error} />;
   } else if (loading) {
-    content = <LoadingSection />;
+    content = <LoadingSpinner />;
   } else {
     content = <DataSection searchString={searchString} data={data} />;
   }

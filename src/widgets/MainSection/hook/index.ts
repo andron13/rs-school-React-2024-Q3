@@ -1,1 +1,1 @@
-export { useFetchCharacters } from "§widgets/MainSection/hook/useFetchCharacters.ts";
+export { useFetchCharacters } from "./useFetchCharacters.ts";

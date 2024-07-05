@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { NotFoundSection } from "§features/NotFoundPage";
+import { NotFoundSection } from "§pages/NotFoundSearchPage";
 
 interface ErrorSectionProps {
   error: string | null;
