@@ -1,16 +1,13 @@
-import { useState, useEffect, ChangeEvent, FormEvent, FC } from "react";
+import { FC, FormEvent, ChangeEvent } from "react";
+
+import { useSearchLocalStorage } from "../hook";
 
 interface SearchSectionProps {
   onSearchClick: (searchValue: string) => void;
 }
 
 export const SearchSection: FC<SearchSectionProps> = ({ onSearchClick }) => {
-  const [inputValue, setInputValue] = useState<string>("");
-
-  useEffect(() => {
-    const savedSearchString = localStorage.getItem("searchValue") || "";
-    setInputValue(savedSearchString);
-  }, []);
+  const [inputValue, setInputValue] = useSearchLocalStorage("");
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
@@ -18,16 +15,11 @@ export const SearchSection: FC<SearchSectionProps> = ({ onSearchClick }) => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    handleSearchClick().then(() => {});
+    handleSearchClick();
   };
 
-  const handleSearchClick = async () => {
+  const handleSearchClick = () => {
     onSearchClick(inputValue);
-    setLocalStorage("searchValue", inputValue);
-  };
-
-  const setLocalStorage = (key: string, value: string) => {
-    localStorage.setItem(key, value.trim());
   };
 
   return (
