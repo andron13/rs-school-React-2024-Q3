@@ -1,7 +1,7 @@
 import { FC } from "react";
 
+import { CharacterList } from "§entities/Character";
 import { Character } from "§shared/api/api.ts";
-import { CharacterList } from "§widgets/CharacterList";
 
 interface DataSectionProps {
   searchString: string;
