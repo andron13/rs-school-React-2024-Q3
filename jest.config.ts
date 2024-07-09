@@ -7,6 +7,9 @@ module.exports = {
   },
   testEnvironment: "jest-environment-jsdom",
   transform: {
-    "^.+\\.tsx?$": "ts-jest",
+    "^.+\\.(t|j)s$": [
+      "ts-jest",
+      { diagnostics: { ignoreCodes: ["TS151001"] } },
+    ],
   },
 };
