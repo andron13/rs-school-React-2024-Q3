@@ -3,6 +3,7 @@ import { FC } from "react";
 import imgSrc from "../../assets/images/notfound.png";
 
 export const NotFoundSection: FC = () => {
+  // noinspection TypeScriptValidateTypes
   return (
     <section className="flex flex-col items-center justify-center bg-gray-100">
       <h2 className="text-3xl font-bold text-gray-800 mb-6">Page Not Found</h2>

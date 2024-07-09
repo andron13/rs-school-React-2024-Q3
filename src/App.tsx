@@ -1,16 +1,12 @@
 import { FC } from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { About } from "§pages/about";
-import { Frontpage } from "§pages/frontpage";
-import { NotFound404 } from "§pages/notFound404";
+import { routes } from "§shared/routes";
 
 export const App: FC = () => {
-  return (
-    <Routes>
-      <Route path="/" element={<Frontpage />} />
-      <Route path="about" element={<About />} />
-      <Route path="*" element={<NotFound404 />} />
-    </Routes>
-  );
+  const render = routes.map((e) => {
+    return <Route path={e.path} element={e.element} />;
+  });
+
+  return <Routes>{render}</Routes>;
 };

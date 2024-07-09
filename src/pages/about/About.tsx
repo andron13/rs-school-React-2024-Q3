@@ -8,7 +8,9 @@ export const About = () => (
       <Logo />
       <ErrorButton />
     </header>
-    <main className="flex justify-evenly ">about</main>
+    <main className="flex justify-evenly h-32 text-7xl items-center">
+      It is a test with about
+    </main>
     <Footer />
   </div>
 );
