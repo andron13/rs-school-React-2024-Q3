@@ -32,8 +32,9 @@
       "§shared/*": ["src/shared/*"],
       "§features/*": ["src/features/*"],
       "§widgets/*": ["src/widgets/*"],
-      "§pages/*": ["src/pages/*"],
-    }
+      "§pages/*": ["src/pages/*"]
+    },
+    "allowSyntheticDefaultImports": true
   },
   "include": [
     "src"
