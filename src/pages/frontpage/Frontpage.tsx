@@ -1,6 +1,5 @@
 import { useState, useEffect, FC } from "react";
 
-import { Footer } from "§/entities/Footer";
 import { Header } from "§/widgets/Header";
 import { MainSection } from "§/widgets/MainSection";
 

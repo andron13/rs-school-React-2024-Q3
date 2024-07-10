@@ -14,13 +14,11 @@ export const useFetchCharacters = (searchString: string) => {
       if (typeof response === "number") {
         throw new Error(`Failed to fetch. Status code: ${response}`);
       }
-      setTimeout(() => {
-        setData(response.results);
-        setError(null);
-        setLoading(false);
-      }, 500);
+      setData(response.results);
+      setError(null);
     } catch (error) {
       setError((error as Error).message);
+    } finally {
       setLoading(false);
     }
   };
