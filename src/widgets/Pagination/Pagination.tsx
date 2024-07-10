@@ -20,7 +20,7 @@ export const Pagination: FC<PaginationProps> = ({
     `px-6 py-3 text-lg rounded-lg ${disabled ? "bg-gray-300 cursor-not-allowed" : "bg-green-500 hover:bg-green-700 text-white"}`;
 
   return (
-    <div className="flex items-center space-x-6 mt-6 mb-10">
+    <div className="flex items-center justify-center space-x-6 mt-6 mb-10">
       <button
         className={buttonClass(isPrevDisabled)}
         disabled={isPrevDisabled}
