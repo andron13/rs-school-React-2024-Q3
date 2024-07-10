@@ -1,4 +1,5 @@
 import { FC, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { CharacterItem } from "../";
 
@@ -10,6 +11,8 @@ interface CharacterListProps {
 }
 
 export const CharacterList: FC<CharacterListProps> = ({ characters }) => {
+  const navigate = useNavigate();
+
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
   const totalPages = useMemo(() => {
@@ -23,6 +26,10 @@ export const CharacterList: FC<CharacterListProps> = ({ characters }) => {
     return characters.slice(startIndex, endIndex);
   }, [characters, currentPage, itemsPerPage]);
 
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    navigate(`?page=${page}`);
+  };
   return (
     <>
       <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -33,7 +40,7 @@ export const CharacterList: FC<CharacterListProps> = ({ characters }) => {
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
-        onPageChange={setCurrentPage}
+        onPageChange={handlePageChange}
       />
     </>
   );

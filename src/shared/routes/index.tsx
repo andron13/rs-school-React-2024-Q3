@@ -1,3 +1,5 @@
+import { Details } from "§/entities/Details";
+import DetailsLayout from "§/features/DetailsLayout";
 import MainLayout from "§/features/MainLayout";
 import { About } from "§/pages/about";
 import { Frontpage } from "§/pages/frontpage";
@@ -14,6 +16,15 @@ export const routes = [
       {
         path: "about",
         element: <About />,
+      },
+      {
+        element: <DetailsLayout />,
+        children: [
+          {
+            path: "/details/:itemId",
+            // element: <Details />,
+          },
+        ],
       },
       {
         path: "*",
