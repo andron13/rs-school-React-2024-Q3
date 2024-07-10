@@ -1,8 +1,8 @@
 import { FC } from "react";
 
-import { ErrorButton } from "§entities/ErrorButton";
-import { Logo } from "§entities/Logo";
-import { SearchSection } from "§widgets/SearchSection/ui";
+import { ErrorButton } from "§/entities/ErrorButton";
+import { Logo } from "§/entities/Logo";
+import { SearchSection } from "§/widgets/SearchSection/ui";
 
 interface HeaderProps {
   onSearchClick: (searchValue: string) => void;

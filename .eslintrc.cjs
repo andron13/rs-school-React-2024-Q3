@@ -10,7 +10,7 @@ module.exports = {
     "plugin:import/typescript",
     "plugin:import/warnings",
   ],
-  ignorePatterns: ["dist", ".eslintrc.cjs", "tailwind.config.js", "tsconfig.app.json", "jest.config.ts"],
+  ignorePatterns: ["dist", ".eslintrc.cjs", "tailwind.config.js", "tsconfig.app.json", "jest.config.ts", "vite.config.ts"],
   parser: "@typescript-eslint/parser",
   plugins: [
     "react",

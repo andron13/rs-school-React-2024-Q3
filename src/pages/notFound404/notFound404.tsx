@@ -1,6 +1,6 @@
-import { ErrorButton } from "§entities/ErrorButton";
-import { Footer } from "§entities/Footer";
-import { Logo } from "§entities/Logo";
+import { ErrorButton } from "§/entities/ErrorButton";
+import { Footer } from "§/entities/Footer";
+import { Logo } from "§/entities/Logo";
 
 export const NotFound404 = () => (
   <div className="flex flex-col min-h-screen">

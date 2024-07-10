@@ -1,3 +1,5 @@
+// noinspection TypeScriptValidateTypes
+
 import { FC } from "react";
 
 import imgSrc from "§/assets/images/spinner.png";

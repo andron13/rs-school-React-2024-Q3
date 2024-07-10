@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import fetchCharacters, { ApiResponse, Character } from "§shared/api/api.ts";
+import fetchCharacters, { ApiResponse, Character } from "§/shared/api/api.ts";
 
 export const useFetchCharacters = (searchString: string) => {
   const [data, setData] = useState<Character[] | null>(null);

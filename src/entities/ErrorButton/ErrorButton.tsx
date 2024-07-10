@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 
-import { ErrorComponent } from "§entities/ErrorComponent";
+import { ErrorComponent } from "§/entities/ErrorComponent";
 
 interface ErrorButtonProps {}
 

@@ -13,7 +13,7 @@
     "jest:coverage": "jest --coverage",
     "jest:verbose": "jest --verbose",
     "jest:verbose:coverage": "jest --verbose --coverage",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --no-ignore",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:ignore": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --no-ignore",
     "format:fix": "prettier --write \"./**/*.{ts,tsx,css}\"",
     "prepare": "husky"
@@ -59,7 +59,8 @@
     "tailwindcss": "^3.4.4",
     "ts-jest": "^29.2.0",
     "typescript": "^5.5.3",
-    "vite": "^5.3.2"
+    "vite": "^5.3.2",
+    "vitest": "^2.0.1"
   },
   "engines": {
     "node": "^20.0.0"

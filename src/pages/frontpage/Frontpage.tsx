@@ -1,8 +1,8 @@
 import { useState, useEffect, FC } from "react";
 
-import { Footer } from "§entities/Footer";
-import { Header } from "§widgets/Header";
-import { MainSection } from "§widgets/MainSection";
+import { Footer } from "§/entities/Footer";
+import { Header } from "§/widgets/Header";
+import { MainSection } from "§/widgets/MainSection";
 
 export const Frontpage: FC = () => {
   const [searchString, setSearchString] = useState<string>("");

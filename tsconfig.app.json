@@ -26,14 +26,9 @@
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": true,
     /*Path*/
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
       "§/*": ["src/*"],
-      "§entities/*": ["src/entities/*"],
-      "§shared/*": ["src/shared/*"],
-      "§features/*": ["src/features/*"],
-      "§widgets/*": ["src/widgets/*"],
-      "§pages/*": ["src/pages/*"]
     },
   },
   "include": [

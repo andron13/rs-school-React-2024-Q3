@@ -2,7 +2,7 @@ import { FC } from "react";
 
 import { CharacterItem } from "../";
 
-import { Character } from "§shared/api/api.ts";
+import { Character } from "§/shared/api/api.ts";
 
 interface CharacterListProps {
   characters: Character[];

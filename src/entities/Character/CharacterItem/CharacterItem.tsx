@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { Character } from "§shared/api/api.ts";
+import { Character } from "§/shared/api/api.ts";
 
 interface CharacterItemProps {
   character: Character;

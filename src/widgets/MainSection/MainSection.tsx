@@ -3,8 +3,8 @@ import { FC, ReactNode } from "react";
 import { useFetchCharacters } from "./hook";
 import { DataSection } from "./ui";
 
-import { ErrorSection } from "§entities/ErrorSection";
-import { LoadingSpinner } from "§entities/LoadingSpinner";
+import { ErrorSection } from "§/entities/ErrorSection";
+import { LoadingSpinner } from "§/entities/LoadingSpinner";
 
 interface MainSectionProps {
   searchString: string;

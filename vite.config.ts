@@ -7,13 +7,6 @@ import { defineConfig } from "vite";
 export default defineConfig({
   plugins: [react()],
   resolve: {
-    alias: [
-      { find: "§", replacement: resolve(__dirname, "./src/") },
-      { find: "§entities", replacement: resolve(__dirname, "./src/entities") },
-      { find: "§features", replacement: resolve(__dirname, "./src/features") },
-      { find: "§widgets", replacement: resolve(__dirname, "./src/widgets") },
-      { find: "§shared", replacement: resolve(__dirname, "./src/shared") },
-      { find: "§pages", replacement: resolve(__dirname, "./src/pages") },
-    ],
+    alias: [{ find: "§", replacement: resolve(__dirname, "./src/") }],
   },
 });

@@ -1,6 +1,8 @@
+// noinspection TypeScriptValidateTypes
+
 import { FC } from "react";
 
-import imgSrc from "../../assets/images/logo.png";
+import imgSrc from "§/assets/images/logo.png";
 
 export const Logo: FC = () => {
   return (

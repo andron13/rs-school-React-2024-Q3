@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import imgSrc from "../../assets/images/notfound.png";
+import imgSrc from "§/assets/images/notfound.png";
 
 export const NotFoundSection: FC = () => {
   // noinspection TypeScriptValidateTypes

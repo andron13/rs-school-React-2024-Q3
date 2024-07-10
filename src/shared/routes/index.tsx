@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
 
-import { About } from "§pages/about";
-import { Frontpage } from "§pages/frontpage";
-import { NotFound404 } from "§pages/notFound404";
+import { About } from "§/pages/about";
+import { Frontpage } from "§/pages/frontpage";
+import { NotFound404 } from "§/pages/notFound404";
 
 export interface Route {
   path: string;
