@@ -1,5 +1,4 @@
 import { ErrorButton } from "§/entities/ErrorButton";
-import { Footer } from "§/entities/Footer";
 import { Logo } from "§/entities/Logo";
 
 export const About = () => (
@@ -11,6 +10,5 @@ export const About = () => (
     <main className="flex justify-evenly h-32 text-7xl items-center">
       It is a test with about
     </main>
-    <Footer />
   </div>
 );

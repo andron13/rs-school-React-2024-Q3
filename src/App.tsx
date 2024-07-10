@@ -1,12 +1,7 @@
-import { FC } from "react";
-import { Route, Routes } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { routes } from "§/shared/routes";
 
-export const App: FC = () => {
-  const render = routes.map((e) => {
-    return <Route path={e.path} element={e.element} />;
-  });
+const router = createBrowserRouter(routes);
 
-  return <Routes>{render}</Routes>;
-};
+export const App = () => <RouterProvider router={router} />;

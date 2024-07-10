@@ -20,7 +20,6 @@ export const Frontpage: FC = () => {
     <div className="flex flex-col min-h-screen">
       <Header onSearchClick={handleSearchClick} />
       <MainSection searchString={searchString} />
-      <Footer />
     </div>
   );
 };
