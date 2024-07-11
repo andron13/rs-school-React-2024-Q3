@@ -29,11 +29,12 @@ export interface ApiResponse {
   results: Character[];
 }
 
-async function fetchCharacters(
-  character: string = "",
-): Promise<ApiResponse | number> {
-  const api: string = `https://rickandmortyapi.com/api/character/?name=${character}`;
+const baseUrl: string = "https://rickandmortyapi.com/api";
 
+export async function fetchCharacters(
+  keyword: string = "",
+): Promise<ApiResponse | number> {
+  const api: string = `${baseUrl}/character/${keyword}`;
   const res = await fetch(api);
   if (!res.ok) {
     return res.status;
@@ -41,4 +42,15 @@ async function fetchCharacters(
   return res.json();
 }
 
-export default fetchCharacters;
+export async function fetchCharacterByID(id: string = "1") {
+  const api: string = `${baseUrl}/character/${id}`;
+  const res = await fetch(api);
+  if (!res.ok) {
+    return res.status;
+  }
+
+  const json = await res.json();
+  console.log("test: json", json);
+
+  return json;
+}

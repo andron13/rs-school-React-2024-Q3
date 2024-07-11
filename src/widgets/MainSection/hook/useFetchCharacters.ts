@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import fetchCharacters, { ApiResponse, Character } from "§/shared/api/api.ts";
+import { ApiResponse, Character, fetchCharacters } from "§/shared/api/api.ts";
 
 export const useFetchCharacters = (searchString: string) => {
   const [data, setData] = useState<Character[] | null>(null);
@@ -9,8 +9,10 @@ export const useFetchCharacters = (searchString: string) => {
 
   const fetchDataFromServer = async (result: string) => {
     setLoading(true);
+    const searchKeywordByName = `?name=${result}`;
     try {
-      const response: ApiResponse | number = await fetchCharacters(result);
+      const response: ApiResponse | number =
+        await fetchCharacters(searchKeywordByName);
       if (typeof response === "number") {
         throw new Error(`Failed to fetch. Status code: ${response}`);
       }

@@ -1,11 +1,10 @@
-import { FC, ReactNode, useMemo, useState } from "react";
+import { FC, ReactNode } from "react";
 
 import { useFetchCharacters } from "./hook";
 import { DataSection } from "./ui";
 
 import { ErrorSection } from "§/entities/ErrorSection";
 import { LoadingSpinner } from "§/entities/LoadingSpinner";
-import { Pagination } from "§/widgets/Pagination";
 
 interface MainSectionProps {
   searchString: string;
@@ -13,6 +12,7 @@ interface MainSectionProps {
 
 export const MainSection: FC<MainSectionProps> = ({ searchString }) => {
   const { data, error, loading } = useFetchCharacters(searchString);
+  console.log({ data });
 
   let content: ReactNode;
   if (error) {

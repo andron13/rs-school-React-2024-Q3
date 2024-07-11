@@ -18,16 +18,13 @@ export const CharacterItem: FC<CharacterItemProps> = ({ character }) => {
           className="mb-2 rounded-lg"
         />
         <h3 className="text-xl font-semibold">{character.name}</h3>{" "}
+        {/*<p className={pClass}>Status: {character.status}</p>*/}
+        <p className={pClass}>Species: {character.species}</p>
+        <p className={pClass}>Gender: {character.gender}</p>
+        {/*<p className={pClass}>Origin: {character.origin.name}</p>*/}
+        {/*<p className={pClass}>Location: {character.location.name}</p>*/}
+        {/*<p className={pClass}>Number of Episodes: {character.episode.length}</p>*/}
       </Link>
-      <p className={pClass}>Status: {character.status}</p>
-      <p className={pClass}>Species: {character.species}</p>
-      <p className={pClass}>Gender: {character.gender}</p>
-      <p className={pClass}>Origin: {character.origin.name}</p>
-      <p className={pClass}>Location: {character.location.name}</p>
-      <p className={pClass}>Number of Episodes: {character.episode.length}</p>
-      <a href={character.url} target="_blank" rel="noopener noreferrer">
-        Character Details
-      </a>
     </article>
   );
 };

@@ -1,9 +1,9 @@
-import { Details } from "§/entities/Details";
 import DetailsLayout from "§/features/DetailsLayout";
 import MainLayout from "§/features/MainLayout";
 import { About } from "§/pages/about";
 import { Frontpage } from "§/pages/frontpage";
 import { NotFound404 } from "§/pages/notFound404";
+import { Details } from "§/widgets/Details";
 
 export const routes = [
   {
