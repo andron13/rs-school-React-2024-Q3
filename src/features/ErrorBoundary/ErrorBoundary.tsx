@@ -1,5 +1,3 @@
-// noinspection TypeScriptValidateTypes
-
 import { Component, ErrorInfo, ReactNode } from "react";
 
 import { ErrorBoundaryHandlerUi } from "./ui";

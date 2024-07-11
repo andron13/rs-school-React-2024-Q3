@@ -42,15 +42,11 @@ export async function fetchCharacters(
   return res.json();
 }
 
-export async function fetchCharacterByID(id: string = "1") {
+export async function fetchCharacterByID(id: string) {
   const api: string = `${baseUrl}/character/${id}`;
   const res = await fetch(api);
   if (!res.ok) {
     return res.status;
   }
-
-  const json = await res.json();
-  console.log("test: json", json);
-
-  return json;
+  return await res.json();
 }
