@@ -22,7 +22,7 @@ export const routes = [
         children: [
           {
             path: "/details/:itemId",
-            // element: <Details />,
+            element: <Details />,
           },
         ],
       },

@@ -1,9 +1,7 @@
-// noinspection TypeScriptValidateTypes
-
 import { FC } from "react";
 
-import imgSrc from "§/assets/images/spinner.png";
+import { spinnerImg } from "§/assets";
 
 export const LoadingSpinner: FC = () => (
-  <img src={imgSrc} alt="spinner" className="w-32 h-32 animate-spin" />
+  <img src={spinnerImg} alt="spinner" className="w-32 h-32 animate-spin" />
 );

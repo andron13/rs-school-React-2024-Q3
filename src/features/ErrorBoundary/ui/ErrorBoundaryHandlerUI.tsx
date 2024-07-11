@@ -1,6 +1,4 @@
-// noinspection TypeScriptValidateTypes
-
-import imgSrc from "§/assets/images/break.png";
+import { errorImg } from "§/assets";
 
 export const ErrorBoundaryHandlerUi = () => (
   <section className="h-screen flex flex-col items-center justify-center bg-red-100">
@@ -12,7 +10,7 @@ export const ErrorBoundaryHandlerUi = () => (
     </p>
     <figure className="w-1/2 max-w-md">
       <img
-        src={imgSrc}
+        src={errorImg}
         alt="Error illustration"
         className="rounded shadow-lg"
       />
