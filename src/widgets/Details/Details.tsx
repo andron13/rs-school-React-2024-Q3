@@ -1,11 +1,12 @@
 import clsx from "clsx";
-import { useState, useEffect, ReactNode } from "react";
+import { useState, useEffect, ReactNode, MouseEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { DataDetailsUi } from "./ui/Details.tsx";
 
 import { ErrorSection } from "§/entities/ErrorSection";
 import { LoadingSpinner } from "§/entities/LoadingSpinner";
+import { Character } from "§/shared/types";
 import { useFetchCharacterById } from "§/widgets/Details/hook";
 
 const classes = {
@@ -33,7 +34,7 @@ export const Details = () => {
     navigate("/");
   };
 
-  const handleBackgroundClick = (event) => {
+  const handleBackgroundClick = (event: MouseEvent<HTMLDivElement>) => {
     if (event.target === event.currentTarget) {
       handleClose();
     }
@@ -51,7 +52,7 @@ export const Details = () => {
   } else if (loading) {
     content = <LoadingSpinner />;
   } else {
-    content = <DataDetailsUi data={data} />;
+    content = <DataDetailsUi data={data as Character} />;
   }
 
   return (

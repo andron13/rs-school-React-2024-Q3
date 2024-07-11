@@ -12,7 +12,6 @@ interface MainSectionProps {
 
 export const MainSection: FC<MainSectionProps> = ({ searchString }) => {
   const { data, error, loading } = useFetchCharacters(searchString);
-  console.log({ data });
 
   let content: ReactNode;
   if (error) {

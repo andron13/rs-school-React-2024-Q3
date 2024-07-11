@@ -1,4 +1,8 @@
-export const DataDetailsUi = ({ data }) => {
+import { FC } from "react";
+
+import { Character } from "§/shared/types";
+
+export const DataDetailsUi: FC<{ data: Character }> = ({ data }) => {
   const classes = {
     container: "mt-2 border rounded-lg p-4 text-gray-800 text-xl",
     title: "text-2xl font-bold mb-2",

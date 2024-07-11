@@ -1,16 +1,14 @@
-import { FC, useMemo, useState } from "react";
+import React, { FC, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { CharacterItem } from "../";
 
-import { Character } from "§/shared/api/api.ts";
+import { Character } from "§/shared/types";
 import { Pagination } from "§/widgets/Pagination";
 
-interface CharacterListProps {
-  characters: Character[];
-}
-
-export const CharacterList: FC<CharacterListProps> = ({ characters }) => {
+export const CharacterList: FC<{ characters: Character[] }> = ({
+  characters,
+}) => {
   const navigate = useNavigate();
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -30,6 +28,7 @@ export const CharacterList: FC<CharacterListProps> = ({ characters }) => {
     setCurrentPage(page);
     navigate(`?page=${page}`);
   };
+
   return (
     <>
       <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">

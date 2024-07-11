@@ -1,13 +1,9 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import { Link } from "react-router-dom";
 
-import { Character } from "§/shared/api/api.ts";
+import { Character } from "§/shared/types";
 
-interface CharacterItemProps {
-  character: Character;
-}
-
-export const CharacterItem: FC<CharacterItemProps> = ({ character }) => {
+export const CharacterItem: FC<{ character: Character }> = ({ character }) => {
   const pClass: string = "py-1";
   return (
     <article className="border border-gray-400 p-4 mb-4 rounded-lg">

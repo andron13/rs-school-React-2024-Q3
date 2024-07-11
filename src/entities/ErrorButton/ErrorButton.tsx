@@ -2,9 +2,7 @@ import { FC, useState } from "react";
 
 import { ErrorComponent } from "§/entities/ErrorComponent";
 
-interface ErrorButtonProps {}
-
-export const ErrorButton: FC<ErrorButtonProps> = () => {
+export const ErrorButton: FC = () => {
   const [showComponent, setShowComponent] = useState<boolean>(false);
 
   const toggleComponent = () => {
