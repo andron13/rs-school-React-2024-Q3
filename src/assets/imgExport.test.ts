@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest";
 
-import { spinnerImg, logoImg, notfoundImg, errorImg } from "§/assets";
+import {
+  spinnerImg,
+  logoImg,
+  notfoundImg,
+  errorImg,
+} from "§/assets/imgExport.ts";
 
 describe("Testing image imports", () => {
   it("spinnerImg has the correct path", () => {

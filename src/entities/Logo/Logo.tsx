@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { logoImg } from "§/assets";
+import { logoImg } from "§/assets/imgExport.ts";
 
 export const Logo: FC = () => {
   return (

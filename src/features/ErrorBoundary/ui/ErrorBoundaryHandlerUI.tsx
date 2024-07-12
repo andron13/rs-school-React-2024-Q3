@@ -1,4 +1,4 @@
-import { errorImg } from "§/assets";
+import { errorImg } from "§/assets/imgExport.ts";
 
 export const ErrorBoundaryHandlerUi = () => (
   <section className="h-screen flex flex-col items-center justify-center bg-red-100">
