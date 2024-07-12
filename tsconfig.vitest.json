@@ -1,9 +1,0 @@
-{
-  "extends": "./tsconfig.app.json",
-  "include": ["declarations/**/*.d.ts", "src/**/*", "src/**/*.vue", "src/**/*.json"],
-  "exclude": ["node_modules", "__tests__"],
-  "compilerOptions": {
-    "composite": true,
-    "types": ["node", "vitest/globals"]
-  }
-}

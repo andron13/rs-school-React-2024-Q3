@@ -1,5 +1,9 @@
 /* eslint-disable */
 // @ts-nocheck
+/// <reference types="vitest" />
+/// <reference types="vite/client" />
+// https://vitejs.dev/config/
+
 import { resolve } from "path";
 
 import react from "@vitejs/plugin-react";
@@ -9,7 +13,6 @@ import {
   defineConfig,
 } from "vitest/config";
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   resolve: {
@@ -17,14 +20,15 @@ export default defineConfig({
   },
   test: {
     globals: true,
-    environment: "jsdom",
-    setupFiles: ["./setupTests.ts"],
+    environment: "happy-dom", //"happy-dom" or 'jsdom'
+    setupFiles: ["./src/test/setup.ts"],
     exclude: [...configDefaults.exclude],
     coverage: {
+      provider: "v8", // or 'istanbul'
       exclude: [
         "**/tailwind.config.js/**",
         "**/postcss.config.js/**",
-        "**/setupTests.ts/**",
+        "**/./src/test/setup.ts/**",
         ...coverageConfigDefaults.exclude,
       ],
       thresholds: {
@@ -38,5 +42,6 @@ export default defineConfig({
         },
       },
     },
+    css: false,
   },
 });
