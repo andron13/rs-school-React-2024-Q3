@@ -16,14 +16,10 @@ describe.skip("ErrorComponent", () => {
 describe.skip("ErrorComponent", () => {
   it("renders error message correctly", () => {
     // Mock console.error to prevent actual logging during the test
-    const consoleErrorSpy = jest
-      .spyOn(console, "error")
-      .mockImplementation(() => {});
 
     render(<ErrorComponent />);
 
     // Restore the original console.error after rendering
-    consoleErrorSpy.mockRestore();
 
     // Chai Syntax
     expect(screen.getByText("Something went wrong!")).to.exist;

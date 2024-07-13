@@ -3,7 +3,7 @@ import { FC } from "react";
 import { CharacterList } from "§/entities/Character";
 import { Character } from "§/shared/types";
 
-interface DataSectionProps {
+export interface DataSectionProps {
   searchString: string;
   data: Character[] | null;
 }
