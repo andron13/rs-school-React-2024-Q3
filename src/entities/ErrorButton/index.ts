@@ -1,3 +1,1 @@
-import ErrorButton from "./ErrorButton.tsx";
-
-export default ErrorButton;
+export { ErrorButton } from "./ErrorButton.tsx";

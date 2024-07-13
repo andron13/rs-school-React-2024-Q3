@@ -2,39 +2,37 @@
   "compilerOptions": {
     "composite": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
-    "target": "ES2022",
+    "target": "ESNext",
     "useDefineForClassFields": true,
-    "lib": [
-      "ES2023",
-      "DOM",
-      "DOM.Iterable"
-    ],
+    "lib": ["DOM", "DOM.Iterable","ESNext"],
     "module": "ESNext",
     "skipLibCheck": true,
     /* Bundler mode */
-    "moduleResolution": "bundler",
+    "allowJs": false,
+    "esModuleInterop": false,
+    "moduleResolution": "node",
     "allowImportingTsExtensions": true,
+    "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "moduleDetection": "force",
     "noEmit": true,
     "jsx": "react-jsx",
     /* Linting */
     "strict": false,
     "noUnusedLocals": false,
-    "noUnusedParameters": true,
+    "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": true,
     /*Path*/
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
       "§/*": ["src/*"],
-      "§entities/*": ["src/entities/*"],
-      "§shared/*": ["src/shared/*"],
-      "§features/*": ["src/features/*"],
-      "§widgets/*": ["src/widgets/*"],
-    }
+    },
+    "types": ["vitest/globals"]
   },
   "include": [
     "src"
-  ]
+  ],
+  "exclude": ["node_modules", "__tests__"]
 }

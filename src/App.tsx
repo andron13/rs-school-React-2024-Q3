@@ -1,40 +1,7 @@
-import { Component, ReactNode } from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import Footer from "§entities/Footer/Footer.tsx";
-import Header from "§widgets/Header";
-import MainSection from "§widgets/MainSection";
+import { routes } from "§/shared/routes";
 
-interface AppProps {
-  component?: ReactNode;
-}
+const router = createBrowserRouter(routes);
 
-interface AppState {
-  searchString: string;
-}
-
-class App extends Component<AppProps, AppState> {
-  constructor(props: AppProps) {
-    super(props);
-    const savedSearchString = this.getLocalStorage("searchValue") || "";
-    this.state = {
-      searchString: savedSearchString,
-    };
-  }
-  handleSearchClick = (searchValue: string) => {
-    this.setState({ searchString: searchValue });
-  };
-  getLocalStorage = (key: string): string | null => {
-    return localStorage.getItem(key);
-  };
-  render() {
-    return (
-      <div className="flex flex-col min-h-screen">
-        <Header onSearchClick={this.handleSearchClick} />
-        <MainSection searchString={this.state.searchString} />
-        <Footer />
-      </div>
-    );
-  }
-}
-
-export default App;
+export const App = () => <RouterProvider router={router} />;

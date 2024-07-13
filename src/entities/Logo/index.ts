@@ -1,3 +1,1 @@
-import Logo from "./Logo.tsx";
-
-export default Logo;
+export { Logo } from "./Logo.tsx";

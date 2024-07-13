@@ -1,17 +1,13 @@
-import { Component } from "react";
+import { FC } from "react";
 
-import imgSrc from "../../assets/images/logo.png";
+import { logoImg } from "§/assets/imgExport.ts";
 
-class Logo extends Component {
-  render() {
-    return (
-      <figure className="w-1/3">
-        <a href="/" className="">
-          <img src={imgSrc} alt="logo" />
-        </a>
-      </figure>
-    );
-  }
-}
-
-export default Logo;
+export const Logo: FC = () => {
+  return (
+    <figure className="w-1/3">
+      <a href="/" className="">
+        <img src={logoImg} alt="logo" className="h-40" />
+      </a>
+    </figure>
+  );
+};
