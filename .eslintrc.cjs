@@ -1,6 +1,6 @@
 module.exports = {
   root: true,
-  env: { browser: true, es2020: true , jest: true},
+  env: { browser: true, es2020: true, jest: true },
   extends: [
     "prettier",
     "eslint:recommended",
@@ -8,7 +8,7 @@ module.exports = {
     "plugin:react-hooks/recommended",
     "plugin:import/errors",
     "plugin:import/typescript",
-    "plugin:import/warnings",
+    "plugin:import/warnings"
   ],
   ignorePatterns: ["dist", ".eslintrc.cjs", "tailwind.config.js", "tsconfig.app.json", "vite.config.ts", "setup.ts"],
   parser: "@typescript-eslint/parser",
@@ -20,7 +20,7 @@ module.exports = {
     "vitest",
     "@typescript-eslint",
     "import",
-    "simple-import-sort",
+    "simple-import-sort"
   ],
   rules: {
     "react-compiler/react-compiler": "error",
@@ -30,12 +30,12 @@ module.exports = {
     "prettier/prettier": [
       "error",
       {
-        endOfLine: "auto",
-      },
+        endOfLine: "auto"
+      }
     ],
     "react-refresh/only-export-components": [
       "warn",
-      { allowConstantExport: true },
+      { allowConstantExport: true }
     ],
     "import/no-unresolved": "off",
     "import/order": [
@@ -44,9 +44,9 @@ module.exports = {
         "newlines-between": "always",
         "alphabetize": {
           "order": "asc",
-          "caseInsensitive": true,
-        },
-      },
-    ],
-  },
+          "caseInsensitive": true
+        }
+      }
+    ]
+  }
 };

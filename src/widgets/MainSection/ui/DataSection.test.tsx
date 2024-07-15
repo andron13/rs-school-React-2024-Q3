@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 
-import { DataSection, DataSectionProps } from "./DataSection";
+import { DataSection } from "./DataSection";
 
 import { Character } from "§/shared/types"; // Предположим, что это путь к вашим типам персонажей
 
