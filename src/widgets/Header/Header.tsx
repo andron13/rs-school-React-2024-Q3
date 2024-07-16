@@ -1,6 +1,7 @@
 import { FC } from "react";
 
 import { Logo } from "§/entities/Logo";
+import { useTheme } from "§/shared/context/useTheme.ts";
 import { SearchSection } from "§/widgets/SearchSection/ui";
 
 interface HeaderProps {
@@ -8,10 +9,18 @@ interface HeaderProps {
 }
 
 export const Header: FC<HeaderProps> = ({ onSearchClick }) => {
+  const { theme, toggleTheme } = useTheme();
+
   return (
-    <section className="bg-blue-500 h-56 flex items-center justify-evenly text-center text-white">
+    <header className={`${theme === "light" ? "bg-blue-500" : "bg-gray-800"}`}>
       <Logo />
       <SearchSection onSearchClick={onSearchClick} />
-    </section>
+      <button
+        onClick={toggleTheme}
+        className={`button-primary ${theme === "light" ? "" : "dark"}`}
+      >
+        Toggle Theme
+      </button>
+    </header>
   );
 };

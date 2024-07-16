@@ -1,5 +1,6 @@
 import { FC, FormEvent, ChangeEvent } from "react";
 
+import { useTheme } from "§/shared/context/useTheme.ts";
 import { useAppDispatch, useAppSelector } from "§/shared/store/hooks.ts";
 import { setSearchString } from "§/shared/store/slices/searchStringSlice.ts";
 
@@ -8,6 +9,7 @@ interface SearchSectionProps {
 }
 
 export const SearchSection: FC<SearchSectionProps> = ({ onSearchClick }) => {
+  const { theme } = useTheme();
   const dispatch = useAppDispatch();
   const inputValue = useAppSelector((state) => state.searchString);
 
@@ -25,12 +27,9 @@ export const SearchSection: FC<SearchSectionProps> = ({ onSearchClick }) => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="flex items-center justify-center space-x-4"
-    >
+    <form onSubmit={handleSubmit}>
       <input
-        className="px-4 py-2 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className=""
         type="text"
         placeholder="Input"
         value={inputValue}
@@ -38,7 +37,7 @@ export const SearchSection: FC<SearchSectionProps> = ({ onSearchClick }) => {
       />
       <button
         type="submit"
-        className="px-10 py-2 rounded-lg bg-white text-blue-500 border border-blue-500 hover:bg-blue-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-500 active:text-white"
+        className={`button-primary ${theme === "light" ? "" : "dark"}`}
       >
         Search
       </button>
