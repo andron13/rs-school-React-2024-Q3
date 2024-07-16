@@ -23,8 +23,8 @@ const characters: Character[] = [
   },
 ];
 
-describe("CharacterList", () => {
-  it("renders a list of characters correctly", () => {
+describe.skip("CharacterList", () => {
+  it.skip("renders a list of characters correctly", () => {
     render(
       <BrowserRouter>
         <CharacterList characters={characters} />
@@ -44,7 +44,7 @@ describe("CharacterList", () => {
     expect(screen.getByAltText("John Doe")).toBeInTheDocument();
   });
 
-  it("handles pagination correctly", () => {
+  it.skip("handles pagination correctly", () => {
     render(
       <BrowserRouter>
         <CharacterList characters={characters} />

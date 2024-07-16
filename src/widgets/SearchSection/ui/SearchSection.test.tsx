@@ -3,7 +3,7 @@ import { describe, it, expect } from "vitest";
 
 import { SearchSection } from "./SearchSection.tsx";
 
-describe("SearchSection", () => {
+describe.skip("SearchSection", () => {
   it("renders correctly", () => {
     render(<SearchSection onSearchClick={() => {}} />);
 

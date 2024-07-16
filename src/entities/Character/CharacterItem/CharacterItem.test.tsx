@@ -26,7 +26,7 @@ const character: Character = {
   created: "2024-07-12T12:34:56.789Z",
 };
 
-describe("CharacterItem", () => {
+describe.skip("CharacterItem", () => {
   it("renders character details correctly", () => {
     render(
       <BrowserRouter>

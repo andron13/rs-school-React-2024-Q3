@@ -1,7 +1,7 @@
 import { useState, useEffect, ReactNode, MouseEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { DataDetailsUi } from "./ui/Details.tsx";
+import { DataDetailsUi } from "./ui/DetailsUI.tsx";
 
 import { ErrorSection } from "§/entities/ErrorSection";
 import { LoadingSpinner } from "§/entities/LoadingSpinner";
@@ -49,10 +49,12 @@ export const Details = () => {
       className={`fixed inset-y-0 right-0 pl-10 flex items-center justify-end p-4 transition-transform transform ${isVisible ? "translate-x-0 duration-1000" : "translate-x-full"}`}
       onClick={handleBackgroundClick}
     >
-      <div className="relative bg-gray-100 p-4 shadow-md rounded-lg w-80">
+      <div
+        className={`relative p-4 shadow-md rounded-lg w-80 ${theme === "light" ? "bg-gray-100" : "bg-gray-800 text-white"}`}
+      >
         <button
           onClick={handleClose}
-          className="absolute top-2 right-2 text-gray-500 hover:text-gray-900 text-5xl font-bold"
+          className={`close-button ${theme === "light" ? "text-gray-500 hover:text-gray-900" : "text-white hover:text-gray-400"}`}
         >
           &times;
         </button>

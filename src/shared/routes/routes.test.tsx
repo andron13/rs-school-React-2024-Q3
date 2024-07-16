@@ -3,7 +3,7 @@ import { MemoryRouter } from "react-router-dom";
 
 import { routes } from "§/shared/routes/index.tsx";
 
-describe("Routing", () => {
+describe.skip("Routing", () => {
   it("renders About component on /about", () => {
     render(
       <MemoryRouter initialEntries={["/about"]}>

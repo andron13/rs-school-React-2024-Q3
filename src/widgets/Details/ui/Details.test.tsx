@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 
 import { Character } from "§/shared/types";
-import { DataDetailsUi } from "§/widgets/Details/ui/Details.tsx";
+import { DataDetailsUi } from "§/widgets/Details/ui/DetailsUI.tsx";
 
 describe("DataDetailsUi", () => {
   it("renders correctly with data", () => {
