@@ -12,7 +12,7 @@ export const Header: FC<HeaderProps> = ({ onSearchClick }) => {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <header className={`${theme === "light" ? "bg-blue-500" : "bg-gray-800"}`}>
+    <header className={`${theme === "light" ? "bg-blue-500" : "bg-amber-800"}`}>
       <Logo />
       <SearchSection onSearchClick={onSearchClick} />
       <button

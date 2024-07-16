@@ -1,21 +1,21 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
 
+import { useTheme } from "§/shared/context/useTheme.ts";
 import { Character } from "§/shared/types";
 
 export const CharacterItem: FC<{ character: Character }> = ({ character }) => {
-  const pClass: string = "py-1";
+  const { theme } = useTheme();
+
   return (
-    <article className="border border-gray-400 p-4 mb-4 rounded-lg">
+    <article
+      className={`border border-gray-400 p-4 mb-4 rounded-lg ${theme === "light" ? "bg-white text-gray-900" : "bg-gray-800 text-white"}`}
+    >
       <Link to={`details/${character.id}`}>
-        <img
-          src={character.image}
-          alt={character.name}
-          className="mb-2 rounded-lg"
-        />
-        <h3 className="text-xl font-semibold">{character.name}</h3>{" "}
-        <p className={pClass}>Species: {character.species}</p>
-        <p className={pClass}>Gender: {character.gender}</p>
+        <img src={character.image} alt={character.name} />
+        <h3>{character.name}</h3>
+        <p>Species: {character.species}</p>
+        <p>Gender: {character.gender}</p>
       </Link>
     </article>
   );
