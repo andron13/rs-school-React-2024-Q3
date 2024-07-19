@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import { CharacterInfoPopup } from "§/features/CharacterInfoPopup";
 import { ThemeProvider } from "§/shared/context/ThemeContext.tsx";
 import { routes } from "§/shared/routes";
+import { CharacterInfoPopup } from "§/widgets/CharacterInfoPopup";
 
 const router = createBrowserRouter(routes);
 

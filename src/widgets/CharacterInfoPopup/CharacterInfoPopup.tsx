@@ -2,13 +2,12 @@ import { useState, useEffect } from "react";
 import CsvDownloadButton from "react-json-to-csv";
 import { useSelector } from "react-redux";
 
-import { RootState } from "§/shared/store/store.ts";
+import { selectCharacters } from "§/shared/store/selectors";
+import { Character } from "§/shared/types";
 
 export const CharacterInfoPopup = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const characters = useSelector(
-    (state: RootState) => state.characters.characters,
-  );
+  const characters: Character[] = useSelector(selectCharacters);
 
   useEffect(() => {
     if (characters.length > 0) {
