@@ -22,13 +22,14 @@ export default defineConfig({
     globals: true,
     environment: "happy-dom", //"happy-dom" or 'jsdom'
     setupFiles: ["./src/test/setup.ts"],
-    exclude: [...configDefaults.exclude],
+    exclude: [...configDefaults.exclude, "**/index.ts"],
     coverage: {
       provider: "v8", // or 'istanbul'
       exclude: [
         "**/tailwind.config.js/**",
         "**/postcss.config.js/**",
-        "**/./src/test/setup.ts/**",
+        "**/./src/test/**",
+        "**/**/index.ts",
         ...coverageConfigDefaults.exclude,
       ],
       thresholds: {

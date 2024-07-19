@@ -9,26 +9,28 @@ vi.mock("§/shared/context/useTheme.ts", () => ({
   useTheme: vi.fn(),
 }));
 
+const renderFooterWithTheme = (theme: string) => {
+  (
+    useTheme as unknown as {
+      mockReturnValue: (value: { theme: string }) => void;
+    }
+  ).mockReturnValue({ theme });
+
+  render(
+    <BrowserRouter>
+      <Footer />
+    </BrowserRouter>,
+  );
+};
+
 describe("Footer", () => {
   it("renders correctly with light theme", () => {
-    (
-      useTheme as unknown as {
-        mockReturnValue: (value: { theme: string }) => void;
-      }
-    ).mockReturnValue({ theme: "light" });
+    renderFooterWithTheme("light");
 
-    render(
-      <BrowserRouter>
-        <Footer />
-      </BrowserRouter>,
-    );
-
-    // Проверка наличия текста
     expect(screen.getByText("React Course 2024")).toBeInTheDocument();
     expect(screen.getByText("©andron13")).toBeInTheDocument();
     expect(screen.getByText("About")).toBeInTheDocument();
 
-    // Проверка корректности стилей для светлой темы
     const footerElement = screen
       .getByText("React Course 2024")
       .closest("footer");
@@ -37,25 +39,12 @@ describe("Footer", () => {
   });
 
   it("renders correctly with dark theme", () => {
-    // Создаем мок для функции useTheme
-    (
-      useTheme as unknown as {
-        mockReturnValue: (value: { theme: string }) => void;
-      }
-    ).mockReturnValue({ theme: "dark" });
+    renderFooterWithTheme("dark");
 
-    render(
-      <BrowserRouter>
-        <Footer />
-      </BrowserRouter>,
-    );
-
-    // Проверка наличия текста
     expect(screen.getByText("React Course 2024")).toBeInTheDocument();
     expect(screen.getByText("©andron13")).toBeInTheDocument();
     expect(screen.getByText("About")).toBeInTheDocument();
 
-    // Проверка корректности стилей для темной темы
     const footerElement = screen
       .getByText("React Course 2024")
       .closest("footer");
@@ -64,20 +53,8 @@ describe("Footer", () => {
   });
 
   it("contains a link with correct href and title", () => {
-    // Создаем мок для функции useTheme
-    (
-      useTheme as unknown as {
-        mockReturnValue: (value: { theme: string }) => void;
-      }
-    ).mockReturnValue({ theme: "light" });
+    renderFooterWithTheme("light");
 
-    render(
-      <BrowserRouter>
-        <Footer />
-      </BrowserRouter>,
-    );
-
-    // Проверка наличия ссылки
     const linkElement = screen.getByText("About");
     expect(linkElement).toBeInTheDocument();
     expect(linkElement.closest("a")).toHaveAttribute("href", "/about");

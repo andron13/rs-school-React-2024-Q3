@@ -5,17 +5,12 @@ import { describe, it, expect, vi } from "vitest";
 
 import { CharacterInfoPopup } from "./CharacterInfoPopup";
 
-import { selectCharacters } from "§/shared/store/selectors";
-import charactersReducer, {
-  CharactersState,
-} from "§/shared/store/slices/charactersSlice";
+import charactersReducer from "§/shared/store/slices/charactersSlice";
 
-// Mock selectors
 vi.mock("§/shared/store/selectors", () => ({
   selectCharacters: () => [{ image: "image1.png" }],
 }));
 
-// Create a mock store with the correct state shape
 const mockStore = configureStore({
   reducer: {
     characters: charactersReducer,
