@@ -34,10 +34,7 @@ export const SearchSection: FC<SearchSectionProps> = ({ onSearchClick }) => {
         value={inputValue}
         onChange={handleInputChange}
       />
-      <button
-        type="submit"
-        className="px-10 py-2 rounded-lg bg-white text-blue-500 border border-blue-500 hover:bg-blue-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-500 active:text-white"
-      >
+      <button type="submit" className="button-primary">
         Search
       </button>
     </form>

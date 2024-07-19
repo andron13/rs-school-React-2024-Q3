@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 import CsvDownloadButton from "react-json-to-csv";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { selectCharacters } from "§/shared/store/selectors";
+import { clearCharacters } from "§/shared/store/slices";
 import { Character } from "§/shared/types";
 
 export const CharacterInfoPopup = () => {
   const [isVisible, setIsVisible] = useState(false);
   const characters: Character[] = useSelector(selectCharacters);
-
+  const dispatch = useDispatch();
   useEffect(() => {
     if (characters.length > 0) {
       setIsVisible(true);
@@ -26,7 +27,7 @@ export const CharacterInfoPopup = () => {
       className={`fixed bottom-0 left-0 w-full p-4 flex items-center justify-center transition-transform transform ${isVisible ? "translate-y-0 duration-1000" : "translate-y-full"}`}
     >
       <div className="bg-white shadow-lg p-4 rounded">
-        <h2 className="text-lg">All characters saved: {characters.length}</h2>
+        <h2 className="text-lg">Characters selected: {characters.length}</h2>
         <p>First 4 characters images:</p>
 
         <div className="flex space-x-2">
@@ -39,9 +40,17 @@ export const CharacterInfoPopup = () => {
             />
           ))}
         </div>
-        <CsvDownloadButton data={characters} className="button-primary">
-          Save to CSV
-        </CsvDownloadButton>
+        <div className="flex space-x-2 items-center  gap-4">
+          <button
+            onClick={() => dispatch(clearCharacters())}
+            className="button-primary"
+          >
+            Unselect all
+          </button>
+          <CsvDownloadButton data={characters} className="button-primary">
+            Save to CSV
+          </CsvDownloadButton>
+        </div>
       </div>
     </div>
   );
