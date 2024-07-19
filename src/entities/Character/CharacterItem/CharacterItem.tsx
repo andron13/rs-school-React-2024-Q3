@@ -28,7 +28,7 @@ export const CharacterItem: FC<{ character: Character }> = ({ character }) => {
     <article
       className={`border border-gray-400 p-4 mb-4 rounded-lg ${theme === "light" ? "bg-white text-gray-900" : "bg-gray-800 text-white"}`}
     >
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center gap-2 justify-between h-full">
         <Link to={`details/${character.id}`} className="flex-1">
           <img src={character.image} alt={character.name} className="w-full" />
           <h3 className="mt-2 text-xl font-bold">{character.name}</h3>
@@ -39,7 +39,7 @@ export const CharacterItem: FC<{ character: Character }> = ({ character }) => {
           checked={isSelected}
           onChange={handleCheckboxChange}
           type="checkbox"
-          className="form-checkbox h-5 w-5 mt-4 ring-green-500 bg-gray-200 rounded border-gray-300 focus:ring-2 focus:ring-green-500"
+          className="form-checkbox h-5 w-5 ring-green-500 bg-gray-200 rounded border-gray-300 focus:ring-2 focus:ring-green-500"
         />
       </div>
     </article>
