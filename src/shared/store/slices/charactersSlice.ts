@@ -2,21 +2,32 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { Character } from "§/shared/types";
 
+export interface CharactersState {
+  characters: Character[];
+}
+
+const initialState: CharactersState = {
+  characters: [],
+};
+
 const charactersSlice = createSlice({
   name: "characters",
-  initialState: [] as Character[],
+  initialState,
   reducers: {
-    setCharacters: (state, action: PayloadAction<Character[]>) =>
-      action.payload,
-    selectCharacter: (state, action: PayloadAction<string>) => {
-      // Logic for selecting character
+    addCharacter(state, action: PayloadAction<Character>) {
+      state.characters.push(action.payload);
     },
-    deselectCharacter: (state, action: PayloadAction<string>) => {
-      // Logic for deselecting character
+    removeCharacter(state, action: PayloadAction<Character>) {
+      state.characters = state.characters.filter(
+        (character) => character.id !== action.payload.id,
+      );
+    },
+    clearCharacters() {
+      return initialState;
     },
   },
 });
 
-export const { setCharacters, selectCharacter, deselectCharacter } =
+export const { addCharacter, removeCharacter, clearCharacters } =
   charactersSlice.actions;
 export default charactersSlice.reducer;
