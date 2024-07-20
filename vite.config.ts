@@ -7,6 +7,7 @@
 import { resolve } from "path";
 
 import react from "@vitejs/plugin-react";
+import { ignore } from "./.testignore";
 import {
   configDefaults,
   coverageConfigDefaults,
@@ -20,22 +21,16 @@ export default defineConfig({
   },
   test: {
     globals: true,
-    environment: "happy-dom", //"happy-dom" or 'jsdom'
+    environment: "happy-dom",
     setupFiles: ["./src/test/setup.ts"],
-    exclude: [...configDefaults.exclude, "**/index.ts"],
+    exclude: [...configDefaults.exclude],
     coverage: {
       provider: "v8", // or 'istanbul'
-      exclude: [
-        "**/tailwind.config.js/**",
-        "**/postcss.config.js/**",
-        "**/./src/test/**",
-        "**/**/index.ts",
-        ...coverageConfigDefaults.exclude,
-      ],
+      exclude: [...coverageConfigDefaults.exclude, ...ignore],
       thresholds: {
-        functions: 80,
+        statements: 80,
         branches: 80,
-        "**/index.ts": {
+        "**/**/index.ts": {
           statements: 0,
           functions: 0,
           branches: 0,
