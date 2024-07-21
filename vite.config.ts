@@ -7,7 +7,6 @@
 import { resolve } from "path";
 
 import react from "@vitejs/plugin-react";
-import { ignore } from "./.testignore";
 import {
   configDefaults,
   coverageConfigDefaults,
@@ -26,7 +25,13 @@ export default defineConfig({
     exclude: [...configDefaults.exclude],
     coverage: {
       provider: "v8", // or 'istanbul'
-      exclude: [...coverageConfigDefaults.exclude, ...ignore],
+      exclude: [
+        "**/tailwind.config.js/**",
+        "**/postcss.config.js/**",
+        "**/./src/test/**",
+        "**/**/index.ts",
+        ...coverageConfigDefaults.exclude,
+      ],
       thresholds: {
         statements: 80,
         branches: 80,

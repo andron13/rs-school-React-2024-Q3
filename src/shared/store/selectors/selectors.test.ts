@@ -4,7 +4,7 @@ import { describe, test, expect } from "vitest";
 import { selectCharacters } from "§/shared/store/selectors/characterSelectors.ts";
 import charactersSlice from "§/shared/store/slices/charactersSlice.ts";
 import { RootState } from "§/shared/store/store.ts";
-import { mockCharacters } from "§/test/mock.ts";
+import { mockCharacters } from "§/test/mocks/mock.ts";
 
 const createTestStore = (preloadedState: Partial<RootState>) => {
   return configureStore({
@@ -17,7 +17,6 @@ const createTestStore = (preloadedState: Partial<RootState>) => {
 
 describe("selectCharacters", () => {
   test("should return the characters from state", () => {
-    // Создаем начальное состояние с мок-данными
     const initialState: RootState = {
       characters: {
         characters: [...mockCharacters],

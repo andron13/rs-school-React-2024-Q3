@@ -9,11 +9,8 @@ describe("Pagination", () => {
       <Pagination currentPage={1} totalPages={5} onPageChange={() => {}} />,
     );
 
-    // Check for the presence of "Previous" and "Next" buttons
     expect(screen.getByText("Previous")).toBeInTheDocument();
     expect(screen.getByText("Next")).toBeInTheDocument();
-
-    // Check for the display of current page and total pages
     expect(screen.getByText("1 / 5")).toBeInTheDocument();
   });
 
@@ -23,8 +20,6 @@ describe("Pagination", () => {
     );
 
     const previousButton = screen.getByText("Previous");
-
-    // Check that the "Previous" button is disabled on the first page
     expect(previousButton).toBeDisabled();
   });
 
@@ -34,8 +29,6 @@ describe("Pagination", () => {
     );
 
     const nextButton = screen.getByText("Next");
-
-    // Check that the "Next" button is disabled on the last page
     expect(nextButton).toBeDisabled();
   });
 
@@ -51,11 +44,7 @@ describe("Pagination", () => {
     );
 
     const nextButton = screen.getByText("Next");
-
-    // Click the "Next" button
     fireEvent.click(nextButton);
-
-    // Check that the mock function was called with the correct page number
     expect(onPageChangeMock).toHaveBeenCalledWith(3);
   });
 
@@ -71,11 +60,7 @@ describe("Pagination", () => {
     );
 
     const previousButton = screen.getByText("Previous");
-
-    // Click the "Previous" button
     fireEvent.click(previousButton);
-
-    // Check that the mock function was called with the correct page number
     expect(onPageChangeMock).toHaveBeenCalledWith(2);
   });
 });

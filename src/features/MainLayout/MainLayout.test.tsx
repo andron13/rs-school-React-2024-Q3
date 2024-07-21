@@ -1,8 +1,21 @@
-import { describe, test, expect } from "vitest";
+import { render, screen } from "@testing-library/react";
+import { describe, it, expect } from "vitest";
 
-describe("selectCharacters", () => {
-  test("should return the characters from state", () => {
-    // TODO: Implement test
-    expect(true).toBe(true);
+import MainLayout from "./MainLayout";
+
+vi.mock("react-router-dom", () => ({
+  Outlet: () => <div>Outlet</div>,
+}));
+
+vi.mock("§/entities/Footer", () => ({
+  Footer: () => <div>Footer</div>,
+}));
+
+describe("MainLayout", () => {
+  it("should render Outlet and Footer", () => {
+    render(<MainLayout />);
+
+    expect(screen.getByText("Outlet")).toBeInTheDocument();
+    expect(screen.getByText("Footer")).toBeInTheDocument();
   });
 });

@@ -2,7 +2,7 @@ import { screen } from "@testing-library/react";
 
 import { CharacterItem } from "./CharacterItem";
 
-import { mockCharacter } from "§/test/mock.ts";
+import { mockCharacter } from "§/test/mocks/mock.ts";
 import renderWithProviders from "§/test/renderWithProviders.tsx";
 
 vi.mock("react-redux", async () => {

@@ -7,12 +7,10 @@ import renderWithProviders from "§/test/renderWithProviders";
 
 describe("Header", () => {
   test("renders with light theme", () => {
-    // Mock onSearchClick function
     const onSearchClick = vi.fn();
 
     renderWithProviders(<Header onSearchClick={onSearchClick} />);
 
-    // Проверяем, что элементы отрисованы правильно
     expect(
       screen.getByRole("button", { name: /toggle theme/i }),
     ).toBeInTheDocument();
@@ -38,6 +36,5 @@ describe("Header", () => {
 
     const toggleButton = screen.getByRole("button", { name: /toggle theme/i });
     fireEvent.click(toggleButton);
-    //TODO: Проверить точное поведение toggleTheme
   });
 });

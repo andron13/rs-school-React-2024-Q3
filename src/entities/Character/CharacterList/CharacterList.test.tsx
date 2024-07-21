@@ -27,7 +27,7 @@ describe("CharacterList", () => {
     renderWithProviders(<CharacterList characters={characters} />);
 
     const speciesElements = screen.queryAllByText(/Species: Human/);
-    expect(speciesElements.length).toBe(8); // Или другое количество, если это число меняется
+    expect(speciesElements.length).toBe(8);
   });
 
   it("handles pagination correctly", async () => {

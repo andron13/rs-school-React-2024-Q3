@@ -1,5 +1,5 @@
-import { renderHook, waitFor } from "@testing-library/react"; // Импортируем waitFor
-import { describe, it, expect, vi } from "vitest";
+import { renderHook, waitFor } from "@testing-library/react";
+import { describe, it, expect, vi, Mock } from "vitest";
 
 import { fetchCharacters } from "§/shared/api/api.ts";
 import { ApiResponse, Character } from "§/shared/types";
@@ -11,6 +11,11 @@ vi.mock("§/shared/api/api.ts", () => ({
 
 describe("useFetchCharacters", () => {
   it("should set loading to true while fetching", async () => {
+    (fetchCharacters as Mock).mockResolvedValue({
+      info: { count: 0, pages: 0, next: null, prev: null },
+      results: [],
+    });
+
     const { result } = renderHook(() => useFetchCharacters("Rick"));
 
     expect(result.current.loading).toBe(true);
@@ -46,7 +51,7 @@ describe("useFetchCharacters", () => {
       ] as Character[],
     };
 
-    (fetchCharacters as jest.Mock).mockResolvedValue(mockData); // jest.Mock
+    (fetchCharacters as Mock).mockResolvedValue(mockData);
 
     const { result } = renderHook(() => useFetchCharacters("Rick"));
 
@@ -57,7 +62,7 @@ describe("useFetchCharacters", () => {
   });
 
   it("should set error correctly when fetch fails", async () => {
-    (fetchCharacters as vi.Mock).mockRejectedValue(new Error("Fetch failed"));
+    (fetchCharacters as Mock).mockRejectedValue(new Error("Fetch failed"));
 
     const { result } = renderHook(() => useFetchCharacters("Rick"));
 
