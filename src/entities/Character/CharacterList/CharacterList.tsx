@@ -1,4 +1,4 @@
-import React, { FC, useMemo, useState } from "react";
+import { FC, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { CharacterItem } from "../";

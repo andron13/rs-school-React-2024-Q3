@@ -5,6 +5,7 @@ import { DataSection } from "./ui";
 
 import { ErrorSection } from "§/entities/ErrorSection";
 import { LoadingSpinner } from "§/entities/LoadingSpinner";
+import { useTheme } from "§/shared/context/useTheme.ts";
 
 interface MainSectionProps {
   searchString: string;
@@ -12,6 +13,7 @@ interface MainSectionProps {
 
 export const MainSection: FC<MainSectionProps> = ({ searchString }) => {
   const { data, error, loading } = useFetchCharacters(searchString);
+  const { theme } = useTheme();
 
   let content: ReactNode;
   if (error) {
@@ -23,7 +25,9 @@ export const MainSection: FC<MainSectionProps> = ({ searchString }) => {
   }
 
   return (
-    <main className="bg-gray-200 flex-1 flex flex-col items-center justify-center">
+    <main
+      className={`${theme === "light" ? "bg-white text-gray-900" : "bg-gray-800 text-white"}`}
+    >
       <div className="max-w-screen-lg mx-auto p-4">{content}</div>
     </main>
   );

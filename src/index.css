@@ -1,3 +1,69 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@tailwind variants;
+
+@layer base {
+  h3 {
+    @apply text-2xl font-semibold;
+  }
+
+  h4 {
+    @apply text-xl font-bold mb-1;
+  }
+
+  main {
+    @apply flex flex-col items-center justify-center;
+  }
+
+  header {
+    @apply h-56 flex items-center justify-evenly;
+  }
+
+  footer {
+    @apply h-16 flex items-center justify-evenly;
+  }
+
+  form {
+    @apply flex items-center justify-center space-x-4;
+  }
+
+  button {
+    @apply ml-4 px-4 py-2 rounded-lg border min-w-32;
+  }
+
+  p {
+    @apply py-1;
+  }
+
+  button:disabled {
+    @apply opacity-30 cursor-not-allowed;
+  }
+
+  img {
+    @apply mb-2 rounded-lg border-2 border-amber-100;
+  }
+
+  input {
+    @apply px-4 py-2 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500;
+  }
+}
+
+@layer components {
+  .button-primary {
+    @apply text-white bg-green-500 border border-green-500 hover:bg-green-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 active:bg-green-700 active:text-white;
+  }
+  .close-button {
+    @apply absolute top-2 right-2 text-gray-500 hover:text-gray-900 text-2xl font-bold;
+  }
+}
+
+@layer utilities {
+  .dark .button-primary {
+    @apply text-gray-800 bg-gray-300 border border-gray-300 hover:bg-gray-400 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-50 active:bg-gray-600 active:text-gray-300;
+  }
+
+  .dark input {
+    @apply bg-gray-900 text-white;
+  }
+}

@@ -16,8 +16,7 @@ export const Pagination: FC<PaginationProps> = ({
   const previousButtonText = "Previous";
   const nextButtonText = "Next";
 
-  const buttonClass = (disabled: boolean) =>
-    `py-2 px-4 text-lg rounded-lg ${disabled ? "bg-blue-500 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600 text-white"}`;
+  const buttonClass = (disabled: boolean) => `button-primary`;
 
   return (
     <div className="flex items-center justify-center space-x-6 mt-6 mb-10">

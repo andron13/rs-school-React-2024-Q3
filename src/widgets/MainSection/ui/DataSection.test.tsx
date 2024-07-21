@@ -1,50 +1,48 @@
-import { render, screen } from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
+import { screen } from "@testing-library/react";
 
-import { DataSection, DataSectionProps } from "./DataSection";
+import { DataSection } from "./DataSection";
 
-import { Character } from "§/shared/types"; // Предположим, что это путь к вашим типам персонажей
+import { mockCharacters } from "§/test/mocks/mock.ts";
+import renderWithProviders from "§/test/renderWithProviders.tsx";
 
 describe("DataSection Component", () => {
-  const charactersMock: Character[] = [
-    {
-      id: 1,
-      name: "Rick Sanchez",
-      status: "Alive",
-      species: "Human",
-      type: "",
-      gender: "Male",
-      origin: {
-        name: "Earth (C-137)",
-        url: "https://rickandmortyapi.com/api/location/1",
-      },
-      location: {
-        name: "Earth (Replacement Dimension)",
-        url: "https://rickandmortyapi.com/api/location/20",
-      },
-      image: "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-      episode: ["https://rickandmortyapi.com/api/episode/1"],
-      url: "https://rickandmortyapi.com/api/character/1",
-      created: "2017-11-04T18:48:46.250Z",
-    },
-  ];
+  it("renders search string correctly", () => {
+    renderWithProviders(
+      <DataSection searchString="Rick" data={mockCharacters} />,
+    );
+
+    expect(screen.getByText("Search-string:")).toBeInTheDocument();
+    expect(screen.getByText("Rick")).toBeInTheDocument();
+  });
+
+  it("renders 'empty' when search string is empty", () => {
+    renderWithProviders(<DataSection searchString="" data={mockCharacters} />);
+
+    expect(screen.getByText("Search-string:")).toBeInTheDocument();
+    expect(screen.getByText("empty")).toBeInTheDocument();
+  });
+
   it("renders character list when data is provided", () => {
-    render(
-      <BrowserRouter>
-        <DataSection searchString="" data={charactersMock} />
-      </BrowserRouter>,
+    renderWithProviders(
+      <DataSection searchString="Rick" data={mockCharacters} />,
     );
 
     expect(screen.getByText("Rick Sanchez")).toBeInTheDocument();
   });
 
   it("does not render character list when data is null", () => {
-    render(
-      <BrowserRouter>
-        <DataSection searchString="" data={null} />
-      </BrowserRouter>,
-    );
+    renderWithProviders(<DataSection searchString="Rick" data={null} />);
 
     expect(screen.queryByText("Rick Sanchez")).not.toBeInTheDocument();
+  });
+
+  it("renders all character fields correctly", () => {
+    renderWithProviders(
+      <DataSection searchString="Rick" data={mockCharacters} />,
+    );
+
+    const character = mockCharacters[0];
+
+    expect(screen.getByText(character.name)).toBeInTheDocument();
   });
 });

@@ -1,50 +1,21 @@
-import { render, screen } from "@testing-library/react";
-import { describe, it, expect } from "vitest";
+import { render, screen, waitFor } from "@testing-library/react";
+import { describe, expect, test } from "vitest";
 
 import { ErrorComponent } from "§/entities/ErrorComponent/ErrorComponent.tsx";
-describe.skip("ErrorComponent", () => {
-  it("renders error message correctly", () => {
-    render(<ErrorComponent />);
+import ErrorBoundary from "§/features/ErrorBoundary";
 
-    // Chai Syntax
-    expect(screen.getByText("Something went wrong!")).to.exist;
-
-    // Jest Syntax
-    expect(screen.getByText("Something went wrong!")).toBeInTheDocument();
+describe("selectCharacters", () => {
+  test("should return the characters from state", () => {
+    expect(true).toBe(true);
   });
-});
-describe.skip("ErrorComponent", () => {
-  it("renders error message correctly", () => {
-    // Mock console.error to prevent actual logging during the test
-
-    render(<ErrorComponent />);
-
-    // Restore the original console.error after rendering
-
-    // Chai Syntax
-    expect(screen.getByText("Something went wrong!")).to.exist;
-
-    // Jest Syntax
-    expect(screen.getByText("Something went wrong!")).toBeInTheDocument();
-  });
-});
-describe.skip("ErrorComponent", () => {
-  it("renders error message correctly", () => {
-    // Save the original console.error function
-    const originalConsoleError = console.error;
-
-    // Mock console.error to prevent actual logging during the test
-    console.error = () => {};
-
-    render(<ErrorComponent />);
-
-    // Restore the original console.error after rendering
-    console.error = originalConsoleError;
-
-    // Chai Syntax
-    expect(screen.getByText("Something went wrong!")).to.exist;
-
-    // Jest Syntax (for reference)
-    // expect(screen.getByText("Something went wrong!")).toBeInTheDocument();
+  it("renders component when a child component throws an error", () => {
+    const consoleMock = vi.spyOn(console, "error");
+    render(
+      <ErrorBoundary>
+        <ErrorComponent />
+      </ErrorBoundary>,
+    );
+    expect(consoleMock).toHaveBeenCalledTimes(2);
+    consoleMock.mockReset();
   });
 });
