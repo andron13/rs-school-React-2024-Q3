@@ -8,28 +8,29 @@
     "module": "ESNext",
     "skipLibCheck": true,
     /* Bundler mode */
-    "allowJs": false,
-    "esModuleInterop": false,
+//    "allowJs": false,
+//    "esModuleInterop": false,
     "moduleResolution": "node",
     "allowImportingTsExtensions": true,
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
+//    "jsx": "react-jsx",
     /* Linting */
     "strict": false,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
-    "forceConsistentCasingInFileNames": true,
+//    "forceConsistentCasingInFileNames": true,
     "noImplicitAny": true,
     /*Path*/
     "baseUrl": ".",
     "paths": {
-      "§/*": ["src/*"],
+      "§/*": ["src/*"]
     },
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals"],
+    "jsx": "react"
   },
   "include": [
     "src"

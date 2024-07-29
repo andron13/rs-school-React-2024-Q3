@@ -8,8 +8,8 @@
     "allowSyntheticDefaultImports": true,
     "noEmit": true
   },
-  "include": [
-    "vite.config.ts"
-  ],
+//  "include": [
+//    "vite.config.ts"
+//  ],
   "exclude": ["node_modules", "__tests__"]
 }

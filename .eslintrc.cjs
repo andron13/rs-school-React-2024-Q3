@@ -8,9 +8,10 @@ module.exports = {
     "plugin:react-hooks/recommended",
     "plugin:import/errors",
     "plugin:import/typescript",
-    "plugin:import/warnings"
-  ],
-  ignorePatterns: ["dist", ".eslintrc.cjs", "tailwind.config.js", "tsconfig.app.json", "vite.config.ts", "setup.ts"],
+    "plugin:import/warnings",
+    "next/core-web-vitals"
+],
+  ignorePatterns: ["dist", ".eslintrc.cjs", "tailwind.config.js", "tsconfig.pages.json-delete", "vite.config.ts", "setup.ts"],
   parser: "@typescript-eslint/parser",
   plugins: [
     "react",
@@ -23,9 +24,11 @@ module.exports = {
     "simple-import-sort"
   ],
   rules: {
+    'react/no-unknown-property': 'off',
     "react-compiler/react-compiler": "error",
     "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/ban-ts-comment": "warn",
     "jest/no-mocks-import": "off",
     "prettier/prettier": [
       "error",

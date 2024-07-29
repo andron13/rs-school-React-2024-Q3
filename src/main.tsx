@@ -6,7 +6,7 @@ import { App } from "§/App.tsx";
 import ErrorBoundary from "§/features/ErrorBoundary";
 import { store } from "§/shared/store/store.ts";
 
-import "./index.css";
+import "../styles/globals.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
