@@ -1,8 +1,8 @@
 import { FC } from "react";
 
-import { Logo } from "§/entities/Logo";
-import { useTheme } from "§/shared/context/useTheme.ts";
-import { SearchSection } from "§/widgets/SearchSection/ui";
+import { Logo } from "@/src/entities/Logo";
+import { useTheme } from "@/src/shared/context/useTheme.ts";
+import { SearchSection } from "@/src/widgets/SearchSection/ui";
 
 interface HeaderProps {
   onSearchClick: (searchValue: string) => void;

@@ -4,8 +4,8 @@ import { describe, it, expect } from "vitest";
 
 import { CharacterList } from "./CharacterList.tsx";
 
-import { Character } from "§/shared/types";
-import renderWithProviders from "§/test/renderWithProviders.tsx";
+import { Character } from "@/src/shared/types";
+import renderWithProviders from "@/src/test/renderWithProviders.tsx";
 
 const characters: Character[] = Array.from({ length: 8 }, (_, i) => ({
   id: i + 1,

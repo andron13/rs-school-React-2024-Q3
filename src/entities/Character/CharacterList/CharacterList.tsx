@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 import { CharacterItem } from "../";
 
-import { Character } from "§/shared/types";
-import { Pagination } from "§/widgets/Pagination";
+import { Character } from "@/src/shared/types";
+import { Pagination } from "@/src/widgets/Pagination";
 
 export const CharacterList: FC<{ characters: Character[] }> = ({
   characters,

@@ -1,4 +1,4 @@
-import { Logo } from "§/entities/Logo";
+import { Logo } from "@/src/entities/Logo";
 
 export const About = () => (
   <div className="flex flex-col min-h-screen">

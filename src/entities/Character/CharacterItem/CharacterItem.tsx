@@ -2,10 +2,10 @@ import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { useTheme } from "§/shared/context/useTheme.ts";
-import { addCharacter, removeCharacter } from "§/shared/store/slices";
-import { RootState } from "§/shared/store/store.ts";
-import { Character } from "§/shared/types";
+import { useTheme } from "@/src/shared/context/useTheme.ts";
+import { addCharacter, removeCharacter } from "@/src/shared/store/slices";
+import { RootState } from "@/src/shared/store/store.ts";
+import { Character } from "@/src/shared/types";
 
 export const CharacterItem: FC<{ character: Character }> = ({ character }) => {
   const { theme } = useTheme();

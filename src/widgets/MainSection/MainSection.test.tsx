@@ -5,7 +5,7 @@ import { describe, it, expect, vi, Mock } from "vitest";
 import { useFetchCharacters } from "./hook";
 import { MainSection } from "./MainSection";
 
-import { useTheme } from "§/shared/context/useTheme.ts";
+import { useTheme } from "@/src/shared/context/useTheme.ts";
 
 vi.mock("./hook", () => ({
   useFetchCharacters: vi.fn(),

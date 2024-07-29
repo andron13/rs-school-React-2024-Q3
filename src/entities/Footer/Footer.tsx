@@ -1,7 +1,7 @@
 import { FC, ReactNode } from "react";
 import { Link } from "react-router-dom";
 
-import { useTheme } from "§/shared/context/useTheme.ts";
+import { useTheme } from "@/src/shared/context/useTheme.ts";
 
 export const Footer: FC = (): ReactNode => {
   const { theme } = useTheme();

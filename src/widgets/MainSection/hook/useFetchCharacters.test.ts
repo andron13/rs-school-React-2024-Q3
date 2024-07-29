@@ -1,9 +1,9 @@
 import { renderHook, waitFor } from "@testing-library/react";
 import { describe, it, expect, vi, Mock } from "vitest";
 
-import { fetchCharacters } from "§/shared/api/api.ts";
-import { ApiResponse, Character } from "§/shared/types";
-import { useFetchCharacters } from "§/widgets/MainSection/hook/useFetchCharacters.ts";
+import { fetchCharacters } from "@/src/shared/api/api.ts";
+import { ApiResponse, Character } from "@/src/shared/types";
+import { useFetchCharacters } from "@/src/widgets/MainSection/hook/useFetchCharacters.ts";
 
 vi.mock("§/shared/api/api.ts", () => ({
   fetchCharacters: vi.fn(),

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
-import { fetchCharacterByID } from "§/shared/api/api.ts";
-import { Character } from "§/shared/types";
+import { fetchCharacterByID } from "@/src/shared/api/api.ts";
+import { Character } from "@/src/shared/types";
 
 export const useFetchCharacterById = (characterId: string) => {
   const [data, setData] = useState<Character | null>(null);

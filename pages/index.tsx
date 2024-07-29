@@ -1,5 +1,7 @@
 import { JSX } from "react";
 
+import { StartMeApp } from "../src/StartMeApp";
+
 export default function Home(): JSX.Element {
-  return <h1>Hello World</h1>;
+  return <StartMeApp />;
 }

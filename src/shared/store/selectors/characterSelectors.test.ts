@@ -1,14 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { describe, test, expect } from "vitest";
 
-import { selectCharacters } from "§/shared/store/selectors/characterSelectors.ts";
-import charactersSlice from "§/shared/store/slices/charactersSlice.ts";
-import { RootState } from "§/shared/store/store.ts";
-import { mockCharacters } from "§/test/mocks/mock.ts";
+import { selectCharacters } from "@/src/shared/store/selectors/characterSelectors.ts";
+import charactersSlice from "@/src/shared/store/slices/charactersSlice.ts";
+import { RootState } from "@/src/shared/store/store.ts";
+import { mockCharacters } from "@/src/test/mocks/mock.ts";
 
 const createTestStore = (preloadedState: Partial<RootState>) => {
   return configureStore({
     reducer: {
+      // @ts-ignore
       characters: charactersSlice,
     },
     preloadedState,

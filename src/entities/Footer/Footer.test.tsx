@@ -2,8 +2,8 @@ import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { describe, it, expect, vi } from "vitest";
 
-import { Footer } from "§/entities/Footer";
-import { useTheme } from "§/shared/context/useTheme.ts";
+import { Footer } from "@/src/entities/Footer/Footer.tsx";
+import { useTheme } from "@/src/shared/context/useTheme.ts";
 
 vi.mock("§/shared/context/useTheme.ts", () => ({
   useTheme: vi.fn(),

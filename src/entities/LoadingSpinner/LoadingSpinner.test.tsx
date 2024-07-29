@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 
 import { LoadingSpinner } from "./LoadingSpinner";
 
-import { spinnerImg } from "§/assets/imgExport.ts";
+import { spinnerImg } from "@/src/assets/imgExport.ts";
 
 describe("LoadingSpinner", () => {
   it("renders spinner image correctly", () => {

@@ -1,4 +1,4 @@
-import { ApiResponse, Character } from "§/shared/types";
+import { ApiResponse, Character } from "@/src/shared/types";
 
 const baseUrl: string = "https://rickandmortyapi.com/api";
 

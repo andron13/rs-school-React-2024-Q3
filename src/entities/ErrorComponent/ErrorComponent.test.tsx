@@ -1,8 +1,9 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { describe, expect, test } from "vitest";
 
-import { ErrorComponent } from "§/entities/ErrorComponent/ErrorComponent.tsx";
-import ErrorBoundary from "§/features/ErrorBoundary";
+import { ErrorComponent } from "./ErrorComponent";
+
+import ErrorBoundary from "@/src/features/ErrorBoundary";
 
 describe("selectCharacters", () => {
   test("should return the characters from state", () => {

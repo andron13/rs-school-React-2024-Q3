@@ -3,11 +3,11 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { DataDetailsUi } from "./ui/DetailsUI.tsx";
 
-import { ErrorSection } from "§/entities/ErrorSection";
-import { LoadingSpinner } from "§/entities/LoadingSpinner";
-import { useTheme } from "§/shared/context/useTheme.ts";
-import { Character } from "§/shared/types";
-import { useFetchCharacterById } from "§/widgets/Details/hook";
+import { ErrorSection } from "@/src/entities/ErrorSection";
+import { LoadingSpinner } from "@/src/entities/LoadingSpinner";
+import { useTheme } from "@/src/shared/context/useTheme.ts";
+import { Character } from "@/src/shared/types";
+import { useFetchCharacterById } from "@/src/widgets/Details/hook";
 
 export const Details = () => {
   const { theme } = useTheme();

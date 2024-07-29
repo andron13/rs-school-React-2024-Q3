@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import CsvDownloadButton from "react-json-to-csv";
 import { useDispatch, useSelector } from "react-redux";
 
-import { selectCharacters } from "§/shared/store/selectors";
-import { clearCharacters } from "§/shared/store/slices";
-import { Character } from "§/shared/types";
+import { selectCharacters } from "@/src/shared/store/selectors";
+import { clearCharacters } from "@/src/shared/store/slices";
+import { Character } from "@/src/shared/types";
 
 export const CharacterInfoPopup = () => {
   const [isVisible, setIsVisible] = useState(false);

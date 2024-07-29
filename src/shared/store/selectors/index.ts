@@ -1,1 +1,1 @@
-export { selectCharacters } from "§/shared/store/selectors/characterSelectors.ts";
+export { selectCharacters } from "./characterSelectors.ts";

@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 
-import { Frontpage } from "§/pages/frontpage";
+import { Frontpage } from "@/src/pages/frontpage";
 
 function DetailsLayout() {
   return (

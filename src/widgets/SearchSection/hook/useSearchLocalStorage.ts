@@ -27,5 +27,6 @@ export const useSearchLocalStorage: UseSearchLocalStorage = (
     localStorage.setItem(localStorageKey, value);
   };
 
+  // @ts-ignore
   return [inputValue, setSearchValue];
 };

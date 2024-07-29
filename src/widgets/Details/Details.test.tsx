@@ -4,9 +4,9 @@ import { describe, it, expect, vi, Mock } from "vitest";
 
 import { Details } from "./Details";
 
-import { mockCharacter } from "§/test/mocks/mock.ts";
-import renderWithProviders from "§/test/renderWithProviders.tsx";
-import { useFetchCharacterById } from "§/widgets/Details/hook";
+import { mockCharacter } from "@/src/test/mocks/mock.ts";
+import renderWithProviders from "@/src/test/renderWithProviders.tsx";
+import { useFetchCharacterById } from "@/src/widgets/Details/hook";
 
 vi.mock("§/widgets/Details/hook", () => ({
   useFetchCharacterById: vi.fn(),

@@ -1,4 +1,4 @@
-import { Character } from "§/shared/types";
+import { Character } from "@/src/shared/types";
 
 export const mockCharacter: Character = {
   id: 1,

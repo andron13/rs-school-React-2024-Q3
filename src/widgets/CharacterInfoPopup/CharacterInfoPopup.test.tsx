@@ -5,7 +5,7 @@ import { describe, it, expect, vi } from "vitest";
 
 import { CharacterInfoPopup } from "./CharacterInfoPopup";
 
-import charactersReducer from "§/shared/store/slices/charactersSlice";
+import charactersReducer from "@/src/shared/store/slices/charactersSlice";
 
 vi.mock("§/shared/store/selectors", () => ({
   selectCharacters: () => [{ image: "image1.png" }],

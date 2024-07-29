@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { Character } from "§/shared/types";
+import { Character } from "@/src/shared/types";
 
 export const DataDetailsUi: FC<{ data: Character }> = ({ data }) => {
   return (

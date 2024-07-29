@@ -2,8 +2,8 @@ import { screen } from "@testing-library/react";
 
 import { DataSection } from "./DataSection";
 
-import { mockCharacters } from "§/test/mocks/mock.ts";
-import renderWithProviders from "§/test/renderWithProviders.tsx";
+import { mockCharacters } from "@/src/test/mocks/mock.ts";
+import renderWithProviders from "@/src/test/renderWithProviders.tsx";
 
 describe("DataSection Component", () => {
   it("renders search string correctly", () => {

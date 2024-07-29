@@ -5,7 +5,7 @@ import {
   logoImg,
   notfoundImg,
   errorImg,
-} from "§/assets/imgExport.ts";
+} from "@/src/assets/imgExport.ts";
 
 describe("Testing image imports", () => {
   it("spinnerImg has the correct path", () => {

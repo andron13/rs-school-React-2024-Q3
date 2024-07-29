@@ -3,7 +3,7 @@ import { vi } from "vitest";
 
 import { Header } from "./Header";
 
-import renderWithProviders from "§/test/renderWithProviders";
+import renderWithProviders from "@/src/test/renderWithProviders";
 
 describe("Header", () => {
   test("renders with light theme", () => {
@@ -30,6 +30,7 @@ describe("Header", () => {
 
   test("calls toggleTheme when toggle button is clicked", () => {
     const onSearchClick = vi.fn();
+    // @ts-ignore
     const { container } = renderWithProviders(
       <Header onSearchClick={onSearchClick} />,
     );

@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect, ReactNode } from "react";
 
-import { Theme, ThemeContextProps } from "§/shared/types";
+import { Theme, ThemeContextProps } from "@/src/shared/types";
 
 export const ThemeContext = createContext<ThemeContextProps | undefined>(
   undefined,

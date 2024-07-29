@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 
-import { App } from "§/App";
+import { StartMeApp } from "./StartMeApp";
 
 vi.mock("react-router-dom", () => ({
   createBrowserRouter: vi.fn(),
@@ -22,7 +22,7 @@ vi.mock("§/shared/context/ThemeContext.tsx", () => ({
 
 describe("App", () => {
   it("should render RouterProvider and CharacterInfoPopup inside ThemeProvider", () => {
-    render(<App />);
+    render(<StartMeApp />);
 
     expect(screen.getByText("RouterProvider")).toBeInTheDocument();
     expect(screen.getByText("CharacterInfoPopup")).toBeInTheDocument();

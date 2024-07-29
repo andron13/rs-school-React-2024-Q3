@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { notfoundImg } from "§/assets/imgExport.ts";
+import { notfoundImg } from "@/src/assets/imgExport.ts";
 
 export const NotFoundSection: FC = () => {
   return (

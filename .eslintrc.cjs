@@ -11,7 +11,7 @@ module.exports = {
     "plugin:import/warnings",
     "next/core-web-vitals"
 ],
-  ignorePatterns: ["dist", ".eslintrc.cjs", "tailwind.config.js", "tsconfig.pages.json-delete", "vite.config.ts", "setup.ts"],
+  ignorePatterns: ["dist", ".eslintrc.cjs", "tailwind.config.js", "tsconfig.pages.json-delete", "vite.config.ts", "setup.ts", "delete"],
   parser: "@typescript-eslint/parser",
   plugins: [
     "react",

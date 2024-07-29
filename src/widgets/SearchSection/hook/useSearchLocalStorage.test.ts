@@ -1,7 +1,7 @@
 import { renderHook, act } from "@testing-library/react";
 import { describe, it, expect, beforeEach, vi } from "vitest";
 
-import { useSearchLocalStorage } from "§/widgets/SearchSection/hook/useSearchLocalStorage.ts";
+import { useSearchLocalStorage } from "@/src/widgets/SearchSection/hook/useSearchLocalStorage.ts";
 
 beforeEach(() => {
   vi.restoreAllMocks();

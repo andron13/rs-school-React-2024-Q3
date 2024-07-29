@@ -1,6 +1,6 @@
 import { test, expect, assert, describe } from "vitest";
 
-import { sum } from "§/test/sum.ts";
+import { sum } from "@/src/test/sum.ts";
 
 describe("Sum function tests", () => {
   test("adds 1 + 2 to equal 3", () => {

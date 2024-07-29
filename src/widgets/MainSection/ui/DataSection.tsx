@@ -1,7 +1,7 @@
 import { FC } from "react";
 
-import { CharacterList } from "§/entities/Character";
-import { Character } from "§/shared/types";
+import { CharacterList } from "@/src/entities/Character";
+import { Character } from "@/src/shared/types";
 
 export interface DataSectionProps {
   searchString: string;

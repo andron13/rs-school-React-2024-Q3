@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { test, expect, describe } from "vitest";
 
-import { Logo } from "§/entities/Logo/index.ts";
+import { Logo } from "@/src/entities/Logo/Logo.tsx";
 
 describe("Testing the Logo component", () => {
   test("displays the logo with the correct alt attribute", () => {

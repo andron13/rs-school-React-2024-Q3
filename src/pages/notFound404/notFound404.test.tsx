@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 
-import { NotFound404 } from "§/pages/notFound404/notFound404.tsx";
+import { NotFound404 } from "@/src/pages/notFound404/notFound404.tsx";
 
 describe("notFound404 Component", () => {
   it("renders not found message and image", () => {

@@ -1,7 +1,7 @@
 import { useState, useEffect, FC } from "react";
 
-import { Header } from "§/widgets/Header";
-import { MainSection } from "§/widgets/MainSection";
+import { Header } from "@/src/widgets/Header";
+import { MainSection } from "@/src/widgets/MainSection";
 
 export const Frontpage: FC = () => {
   const [searchString, setSearchString] = useState<string>("");

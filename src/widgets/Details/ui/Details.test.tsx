@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
 
-import { mockCharacter } from "§/test/mocks/mock.ts";
-import { DataDetailsUi } from "§/widgets/Details/ui/DetailsUI.tsx";
+import { mockCharacter } from "@/src/test/mocks/mock.ts";
+import { DataDetailsUi } from "@/src/widgets/Details/ui/DetailsUI.tsx";
 
 describe("DataDetailsUi", () => {
   it("renders correctly with data", () => {
@@ -14,6 +14,7 @@ describe("DataDetailsUi", () => {
   });
 
   it("does not render anything when data is null", () => {
+    // @ts-ignore
     render(<DataDetailsUi data={null} />);
 
     expect(screen.queryByText("Character ID:")).toBeNull();

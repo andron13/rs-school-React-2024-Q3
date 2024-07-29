@@ -41,6 +41,7 @@ describe("ThemeProvider", () => {
   });
 
   test("adds 'dark' class to document element when dark theme is active", () => {
+    // @ts-ignore
     const { rerender } = render(
       <ThemeProvider>
         <TestComponent />

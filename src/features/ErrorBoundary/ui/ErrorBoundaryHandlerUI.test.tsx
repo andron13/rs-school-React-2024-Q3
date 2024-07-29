@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 
 import { ErrorBoundaryHandlerUi } from "./ErrorBoundaryHandlerUI.tsx";
 
-import { errorImg } from "§/assets/imgExport.ts";
+import { errorImg } from "@/src/assets/imgExport.ts";
 
 describe("ErrorBoundaryHandlerUi", () => {
   it("renders error UI correctly", () => {

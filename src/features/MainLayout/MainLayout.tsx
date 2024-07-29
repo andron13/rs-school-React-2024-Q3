@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 
-import { Footer } from "§/entities/Footer";
+import { Footer } from "@/src/entities/Footer";
 
 const MainLayout = () => {
   return (

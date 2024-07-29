@@ -3,9 +3,9 @@ import { FC, ReactNode } from "react";
 import { useFetchCharacters } from "./hook";
 import { DataSection } from "./ui";
 
-import { ErrorSection } from "§/entities/ErrorSection";
-import { LoadingSpinner } from "§/entities/LoadingSpinner";
-import { useTheme } from "§/shared/context/useTheme.ts";
+import { ErrorSection } from "@/src/entities/ErrorSection";
+import { LoadingSpinner } from "@/src/entities/LoadingSpinner";
+import { useTheme } from "@/src/shared/context/useTheme.ts";
 
 interface MainSectionProps {
   searchString: string;
