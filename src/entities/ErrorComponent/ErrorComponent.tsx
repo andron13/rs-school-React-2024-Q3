@@ -1,6 +1,4 @@
-import { FC, useEffect } from "react";
-
-export const ErrorComponent: FC = () => {
+export const ErrorComponent = () => {
   /*  useEffect(() => {
     throw new Error("This is a test error!");
   }, []);
