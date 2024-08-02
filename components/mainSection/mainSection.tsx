@@ -3,7 +3,6 @@ import { FC, ReactNode } from "react";
 import { ErrorSection } from "@/components/error/errorSection.tsx";
 import { LoadingSpinner } from "@/components/loadingSpinner.tsx";
 import { DataSection } from "@/components/mainSection/dataSection.tsx";
-import { useTheme } from "@/components/shared/context/useTheme.ts";
 import { useFetchCharacters } from "@/components/shared/hooks/useFetchCharacters.ts";
 
 interface MainSectionProps {
@@ -12,7 +11,8 @@ interface MainSectionProps {
 
 export const MainSection: FC<MainSectionProps> = ({ searchString }) => {
   const { data, error, loading } = useFetchCharacters(searchString);
-  const { theme } = useTheme();
+  // const { theme } = useTheme();
+  const theme = "light";
 
   let content: ReactNode;
   if (error) {
@@ -22,7 +22,8 @@ export const MainSection: FC<MainSectionProps> = ({ searchString }) => {
   } else {
     content = <DataSection searchString={searchString} data={data} />;
   }
-
+  //TODO: remove
+  console.log("data", data);
   return (
     <main
       className={`${theme === "light" ? "bg-white text-gray-900" : "bg-gray-800 text-white"}`}

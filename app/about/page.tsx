@@ -1,4 +1,4 @@
-const Index = () => (
+const Page = () => (
   <div className="flex flex-col min-h-screen">
     <header className="bg-blue-500 h-56 flex items-center justify-evenly text-center text-white">
       {/*<Logo />*/}
@@ -9,4 +9,4 @@ const Index = () => (
   </div>
 );
 
-export default Index;
+export default Page;

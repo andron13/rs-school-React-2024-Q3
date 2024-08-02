@@ -1,4 +1,6 @@
-import { useRouter } from "next/router";
+"use client";
+
+import { useSearchParams } from "next/navigation";
 import { FC, useMemo, useState } from "react";
 
 import { CharacterItem } from "@/components/character";
@@ -10,9 +12,8 @@ interface CharacterListProps {
 }
 
 export const CharacterList: FC<CharacterListProps> = ({ characters }) => {
-  const router = useRouter();
-  const { query } = router;
-  const page = parseInt(query.page as string, 10) || 1;
+  const searchParams = useSearchParams();
+  const page = parseInt(searchParams.get("page") || "1", 10);
 
   const [currentPage, setCurrentPage] = useState<number>(page);
   const itemsPerPage = 8;
@@ -30,7 +31,9 @@ export const CharacterList: FC<CharacterListProps> = ({ characters }) => {
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-    router.push(`?page=${page}`);
+    const url = new URL(window.location.href);
+    url.searchParams.set("page", page.toString());
+    window.history.pushState({}, "", url.toString());
   };
 
   return (
