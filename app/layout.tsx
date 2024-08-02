@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 
 import "../styles/globals.css";
+import { ReduxProvider } from "@/components/shared/store/redux-provider.tsx";
 
 export const metadata = {
   title: "Next.js",
@@ -10,7 +11,9 @@ export const metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <ReduxProvider>{children}</ReduxProvider>
+      </body>
     </html>
   );
 }

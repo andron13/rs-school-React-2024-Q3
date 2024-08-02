@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useEffect, FC } from "react";
 
 import { Footer } from "@/components/footer.tsx";
