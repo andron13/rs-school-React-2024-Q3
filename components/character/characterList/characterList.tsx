@@ -1,0 +1,50 @@
+import { useRouter } from "next/router";
+import { FC, useMemo, useState } from "react";
+
+import { CharacterItem } from "@/components/character";
+import { Pagination } from "@/components/pagination";
+import { Character } from "@/components/shared/types";
+
+interface CharacterListProps {
+  characters: Character[];
+}
+
+export const CharacterList: FC<CharacterListProps> = ({ characters }) => {
+  const router = useRouter();
+  const { query } = router;
+  const page = parseInt(query.page as string, 10) || 1;
+
+  const [currentPage, setCurrentPage] = useState<number>(page);
+  const itemsPerPage = 8;
+
+  const totalPages = useMemo(() => {
+    return characters ? Math.ceil(characters.length / itemsPerPage) : 1;
+  }, [characters]);
+
+  const currentCharacters = useMemo(() => {
+    if (!characters) return [];
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return characters.slice(startIndex, endIndex);
+  }, [characters, currentPage, itemsPerPage]);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    router.push(`?page=${page}`);
+  };
+
+  return (
+    <>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {currentCharacters.map((character) => (
+          <CharacterItem key={character.id} character={character} />
+        ))}
+      </div>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
+    </>
+  );
+};

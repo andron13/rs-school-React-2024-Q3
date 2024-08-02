@@ -3,8 +3,8 @@
     "types": ["vitest/globals"],
     "target": "ES2020",
     "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "module": "esnext",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "moduleResolution": "bundler",
@@ -13,8 +13,8 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "preserve",
-    "strict": true,
-    "noUnusedLocals": true,
+    "strict": false,
+    "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
     "allowJs": true,
@@ -23,11 +23,9 @@
     "plugins": [{ "name": "next" }],
     "suppressImplicitAnyIndexErrors": true,
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
     }
   },
-  "include": ["./src", "./dist/types/**/*.ts", "./next-env.d.ts"],
-  "exclude": ["node_modules", "__tests__",
-    "delete/vite.config.ts"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
 }

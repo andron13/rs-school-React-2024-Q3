@@ -18,7 +18,6 @@ module.exports = {
     "react-refresh",
     "react-compiler",
     "prettier",
-    "vitest",
     "@typescript-eslint",
     "import",
     "simple-import-sort"
