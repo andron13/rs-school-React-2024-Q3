@@ -1,0 +1,1 @@
+export { CharacterInfoPopup } from "./characterInfoPopup";
