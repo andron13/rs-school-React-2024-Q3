@@ -36,7 +36,7 @@ module.exports = {
       }
     ],
     "react-refresh/only-export-components": [
-      "warn",
+      "off",
       { allowConstantExport: true }
     ],
     "import/no-unresolved": "off",

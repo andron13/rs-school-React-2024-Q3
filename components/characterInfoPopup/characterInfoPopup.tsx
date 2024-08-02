@@ -1,9 +1,11 @@
+"use client";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import CsvDownloadButton from "react-json-to-csv";
 import { useDispatch, useSelector } from "react-redux";
 
-import { selectCharacters } from "@/components/shared/store/selectors";
-import { clearCharacters } from "@/components/shared/store/slices";
+import { selectCharacters } from "@/components/shared/store/selectors/characterSelectors.ts";
+import { clearCharacters } from "@/components/shared/store/slices/charactersSlice.ts";
 import { Character } from "@/components/shared/types";
 
 export const CharacterInfoPopup = () => {
@@ -32,11 +34,13 @@ export const CharacterInfoPopup = () => {
 
         <div className="flex space-x-2">
           {imagesToDisplay.map((image, index) => (
-            <img
+            <Image
               key={index}
               src={image}
               alt={`character-${index}`}
               className="w-10 h-10 rounded-full"
+              width={20}
+              height={20}
             />
           ))}
         </div>
