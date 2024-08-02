@@ -1,4 +1,4 @@
-//ThemeContext.tsx
+"use client";
 import { createContext, useState, useEffect, ReactNode } from "react";
 
 import { Theme, ThemeContextProps } from "@/components/shared/types";

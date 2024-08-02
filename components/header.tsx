@@ -1,19 +1,16 @@
 import { FC } from "react";
 
 import { Logo } from "@/components/logo";
-import { SearchSection } from "@/components/searchSection.tsx";
-// import { useTheme } from "@/components/shared/context/useTheme.ts";
+import { SearchSection } from "@/components/searchSection";
+import { useTheme } from "@/components/shared/context/useTheme";
 
 interface HeaderProps {
   onSearchClick?: (searchValue: string) => void;
 }
 
 export const Header: FC<HeaderProps> = ({ onSearchClick }) => {
-  // const { theme, toggleTheme } = useTheme();
-  const theme = "light";
-  const toggleTheme = () => {
-    console.log("toggleTheme");
-  };
+  const { theme, toggleTheme } = useTheme();
+
   return (
     <header className={`${theme === "light" ? "bg-blue-500" : "bg-amber-800"}`}>
       <Logo />
