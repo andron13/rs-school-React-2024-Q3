@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-import "../styles/globals.css";
+import "./globals.css";
 import { ReduxProvider } from "@/components/shared/store/redux-provider.tsx";
 
 export const metadata = {

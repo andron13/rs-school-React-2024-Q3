@@ -1,4 +1,4 @@
-/** @type {import("tailwindcss").Config} */
+import type { Config } from "tailwindcss";
 export default {
   darkMode: "class",
   content: [
@@ -10,4 +10,4 @@ export default {
     extend: {},
   },
   plugins: [],
-};
+} satisfies Config;
