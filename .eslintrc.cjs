@@ -13,7 +13,6 @@ module.exports = {
     "plugin:import/errors",
     "plugin:import/typescript",
     "plugin:import/warnings",
-    "next/core-web-vitals"
   ],
   ignorePatterns: [
     "!**/.server",

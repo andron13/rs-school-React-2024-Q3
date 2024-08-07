@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
 
-import "./globals.css";
-import { ReduxProvider } from "@/components/shared/store/redux-provider.tsx";
+import "./tailwind.css";
 
 export const metadata = {
   title: "Next.js",
@@ -12,7 +11,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <ReduxProvider>{children}</ReduxProvider>
+        {/*<ReduxProvider>{children}</ReduxProvider>*/}
+        {children}
       </body>
     </html>
   );

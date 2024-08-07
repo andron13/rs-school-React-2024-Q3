@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@remix-run/react";
 import { FC, ReactNode } from "react";
 
 export const Footer: FC = (): ReactNode => {
@@ -8,7 +8,7 @@ export const Footer: FC = (): ReactNode => {
         <span>React Course 2024</span>
         <span>©andron13</span>
         <span>
-          <Link href="/about">About</Link>
+          <Link to="/about">About</Link>
         </span>
       </p>
     </footer>

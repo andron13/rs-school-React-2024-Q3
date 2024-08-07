@@ -1,9 +1,8 @@
-"use client";
 import { useState, useEffect, FC } from "react";
 
-import { Footer } from "@/components/footer.tsx";
-import { Header } from "@/components/header.tsx";
-import { MainSection } from "@/components/mainSection/mainSection.tsx";
+import { Footer } from "~/components/footer.tsx";
+import { Header } from "~/components/header.tsx";
+import { MainSection } from ~/components/mainSection/mainSection.tsx";
 
 const FrontPage: FC = () => {
   const [searchString, setSearchString] = useState<string>("");

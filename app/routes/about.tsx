@@ -1,6 +1,6 @@
-import { Logo } from "@/components/logo.tsx";
+import { Logo } from "~/components/logo";
 
-const Page = () => (
+const About = () => (
   <div className="flex flex-col min-h-screen">
     <header className="bg-blue-500 h-56 flex items-center justify-evenly text-center text-white">
       <Logo />
@@ -11,4 +11,4 @@ const Page = () => (
   </div>
 );
 
-export default Page;
+export default About;

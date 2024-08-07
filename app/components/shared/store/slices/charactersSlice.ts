@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { Character } from "@/components/shared/types";
+import { Character } from "~/components/shared/types";
 
 export interface CharactersState {
   characters: Character[];
