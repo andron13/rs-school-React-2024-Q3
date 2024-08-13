@@ -1,50 +1,46 @@
-# React + TypeScript + Vite
+# React Forms Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
 
-Currently, two official plugins are available:
+This project is a React web application featuring two forms: one built using uncontrolled components and the other with React Hook Form. Data from both forms is stored in Redux and displayed on the main page. Validation is handled using the Yup library.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Routing:** Three routes—Main, Uncontrolled Form, and React Hook Form.
+- **Redux Integration:** Stores form data and displays it on the main page.
+- **Form Validation:** Includes live validation and on-submit validation using Yup.
+- **Data Collection:** Captures user information such as name, age, email, passwords, gender, and more.
+- **File Upload:** Supports image uploads with size and extension validation.
+- **Autocomplete:** Country selection with Redux integration.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Setup
 
-- Configure the top-level `parserOptions` property like this:
+1. **Initialize Project:**
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+   - Clone the repository.
+   - Switch to the `forms` branch.
+   - Run `npm install` to install dependencies.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+2. **Run the Application:**
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+   ```bash
+   npm run dev
+   ```
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+3. **Code Quality Tools:**
+   - Use `npm run lint` to check for linting issues.
+   - Use `npm run format:fix` to automatically format the code.
+
+## Technologies Used
+
+- **React**
+- **TypeScript**
+- **Redux Toolkit**
+- **React Hook Form**
+- **Yup**
+- **Vite**
+- **ESLint, Prettier, Husky**
+
+## Contributions
+
+Feel free to open issues or submit pull requests to contribute to this project.
