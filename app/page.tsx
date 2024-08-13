@@ -8,7 +8,7 @@ const Page: FC = () => {
     <ThemeProvider>
       <div className="flex flex-col min-h-screen">
         <FrontPageComponent />
-        <CharacterInfoPopup />
+        {/*<CharacterInfoPopup />*/}
       </div>
     </ThemeProvider>
   );

@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface Character {
   id: number;
   name: string;
@@ -34,4 +36,8 @@ export type Theme = "light" | "dark";
 export interface ThemeContextProps {
   theme: Theme;
   toggleTheme: () => void;
+}
+
+export interface ReduxProviderProps {
+  children: ReactNode;
 }

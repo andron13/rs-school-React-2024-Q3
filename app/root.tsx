@@ -6,8 +6,10 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 
+import { ThemeProvider } from "~/components/shared/context/ThemeContext";
+import { ReduxProvider } from "~/components/shared/store/redux-provider";
+
 import "./tailwind.css";
-import { Footer } from "~/components/footer";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -19,10 +21,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
+        <ReduxProvider>
+          <ThemeProvider>{children}</ThemeProvider>
+        </ReduxProvider>
         <ScrollRestoration />
         <Scripts />
-        <Footer />
       </body>
     </html>
   );

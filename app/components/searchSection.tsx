@@ -1,6 +1,6 @@
 import { FC, FormEvent, ChangeEvent } from "react";
 
-import { useSearchLocalStorage } from "@/components/shared/hooks/useSearchLocalStorage.ts";
+import { useSearchLocalStorage } from "~/components/shared/hooks/useSearchLocalStorage";
 
 interface SearchSectionProps {
   onSearchClick: (searchValue: string) => void;

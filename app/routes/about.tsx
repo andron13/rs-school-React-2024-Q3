@@ -1,3 +1,4 @@
+import { Footer } from "~/components/footer";
 import { Logo } from "~/components/logo";
 
 const About = () => (
@@ -8,6 +9,7 @@ const About = () => (
     <main className="flex justify-evenly h-32 text-7xl items-center">
       It is a test with about
     </main>
+    <Footer />
   </div>
 );
 
