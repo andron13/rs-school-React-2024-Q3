@@ -1,1 +1,1 @@
-export { ReactHookForm } from "@/pages/react-hook-form/react-hook-form.tsx";
+export { ReactHookForm } from "./react-hook-form.tsx";

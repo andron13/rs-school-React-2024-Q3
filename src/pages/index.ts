@@ -1,4 +1,4 @@
-export { ReactHookForm } from "@/pages/react-hook-form";
+export { ReactHookForm } from "./react-hook-form";
 export { UncontrolledForm } from "./uncontrolled-form";
 export { About } from "./about";
 export { Frontpage } from "./frontpage";
