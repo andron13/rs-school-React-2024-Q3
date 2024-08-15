@@ -1,7 +1,6 @@
 import { Outlet } from "react-router-dom";
 
-import { Footer } from "@/entities/footer";
-import { Header } from "@/entities/header";
+import { Footer, Header } from "@/entities";
 
 const MainLayout = () => {
   return (

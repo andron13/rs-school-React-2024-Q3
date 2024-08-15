@@ -6,6 +6,7 @@ import {
   ReactHookForm,
   UncontrolledForm,
 } from "@/pages";
+import { Test } from "@/pages/test/test.tsx";
 
 export const routes = [
   {
@@ -18,6 +19,10 @@ export const routes = [
       {
         path: "about",
         element: <About />,
+      },
+      {
+        path: "test",
+        element: <Test />,
       },
       {
         path: "uncontrolled-form",

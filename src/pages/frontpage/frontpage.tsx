@@ -5,6 +5,7 @@ const links = [
   { to: "/react-hook-form", label: "React Hook Form" },
   { to: "/about", label: "About" },
   { to: "/404", label: "Not Found" },
+  { to: "/test", label: "test" },
 ];
 
 export const Frontpage = () => {

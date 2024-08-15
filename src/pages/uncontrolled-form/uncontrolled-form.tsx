@@ -1,5 +1,7 @@
 import { ChangeEvent, FormEvent, useRef, useState } from "react";
 
+import { TextInput } from "@/entities";
+
 export const UncontrolledForm = () => {
   const nameRef = useRef<HTMLInputElement>(null);
   const ageRef = useRef<HTMLInputElement>(null);
@@ -60,22 +62,13 @@ export const UncontrolledForm = () => {
         Join Us
       </div>
 
-      <div className="flex flex-col">
-        <label
-          htmlFor="name"
-          className="mb-2 text-lg font-medium text-gray-800"
-        >
-          Name
-        </label>
-        <input
-          id="name"
-          type="text"
-          ref={nameRef}
-          className="rounded-lg border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
-          required
-          placeholder="Enter your name"
-        />
-      </div>
+      <TextInput
+        label="Name"
+        type="text"
+        ref={nameRef}
+        required
+        placeholder="Enter your name"
+      />
 
       <div className="flex flex-col">
         <label htmlFor="age" className="mb-2 text-lg font-medium text-gray-800">
