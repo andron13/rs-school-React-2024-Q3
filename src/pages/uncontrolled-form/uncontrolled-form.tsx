@@ -28,26 +28,34 @@ export const UncontrolledForm = () => {
   const handleInputChange = async (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
-    const { name, value } = e.target;
-    const error = await validateField(name, value);
+    const target = e.target as HTMLInputElement;
+    const { name, type, value, checked } = target;
+    const inputValue: string | boolean = type === "checkbox" ? checked : value;
+
+    console.log(`Input Change - Name: ${name}, Value: ${inputValue}`);
+
+    const error = await validateField(name, inputValue);
+
+    console.log(`Validation Error for ${name}:`, error);
 
     setErrors((prevErrors) => ({
       ...prevErrors,
       [name]: error,
     }));
 
-    // Проверяем, можно ли отправлять форму, валидируя все поля
     const formData = {
       name: nameRef.current?.value || "",
-      age: ageRef.current?.value || "",
-      email: emailRef.current?.value || "",
       password: passwordRef.current?.value || "",
       confirmPassword: confirmPasswordRef.current?.value || "",
-      gender: genderRef.current?.value || "",
       terms: termsRef.current?.checked || false,
     };
 
+    console.log("Form Data on Change:", formData);
+
     const valid = await validateFormData(formData);
+
+    console.log("Validation Result:", valid);
+
     setCanSubmit(valid.valid);
   };
 

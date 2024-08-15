@@ -25,17 +25,21 @@ export const Test = () => {
   const handleInputChange = async (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
-    const target = e.target as HTMLInputElement; // Приведение типа
+    const target = e.target as HTMLInputElement;
     const { name, type, value, checked } = target;
-    const inputValue = type === "checkbox" ? checked : value;
+    const inputValue: string | boolean = type === "checkbox" ? checked : value;
+
+    console.log(`Input Change - Name: ${name}, Value: ${inputValue}`);
+
     const error = await validateField(name, inputValue);
+
+    console.log(`Validation Error for ${name}:`, error);
 
     setErrors((prevErrors) => ({
       ...prevErrors,
       [name]: error,
     }));
 
-    // Проверяем, можно ли отправлять форму, валидируя все поля
     const formData = {
       name: nameRef.current?.value || "",
       password: passwordRef.current?.value || "",
@@ -43,24 +47,46 @@ export const Test = () => {
       terms: termsRef.current?.checked || false,
     };
 
+    console.log("Form Data on Change:", formData);
+
     const valid = await validateFormData(formData);
+
+    console.log("Validation Result:", valid);
+
     setCanSubmit(valid.valid);
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (canSubmit) {
-      const formData = {
-        name: nameRef.current?.value,
-        password: passwordRef.current?.value,
-        confirmPassword: confirmPasswordRef.current?.value,
-        terms: termsRef.current?.checked,
-      };
 
-      console.log("Form Data:", formData);
+    const formData = {
+      name: nameRef.current?.value || "",
+      password: passwordRef.current?.value || "",
+      confirmPassword: confirmPasswordRef.current?.value || "",
+      terms: termsRef.current?.checked || false,
+    };
+
+    console.log("Form Data on Submit:", formData);
+
+    const valid = await validateFormData(formData);
+
+    console.log("Validation Result on Submit:", valid);
+
+    if (valid.valid) {
       console.log("Form submitted successfully!");
     } else {
-      console.error("Form is invalid");
+      console.error("Form is invalid", valid.errors);
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        ...valid.errors.reduce(
+          (acc, error) => {
+            const [field, message] = error.split(": ");
+            acc[field] = message;
+            return acc;
+          },
+          {} as { [key: string]: string },
+        ),
+      }));
     }
   };
 

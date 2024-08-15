@@ -1,12 +1,32 @@
 import * as yup from "yup";
 
-const isFirstLetterUppercase = (value: string) =>
-  value.length > 0 && value[0] === value[0].toUpperCase();
+// Функция для проверки силы пароля
+const passwordStrengthTest = (value) => {
+  const hasNumber = /\d/;
+  const hasUppercase = /[A-Z]/;
+  const hasLowercase = /[a-z]/;
+  const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/;
+  return (
+    hasNumber.test(value) &&
+    hasUppercase.test(value) &&
+    hasLowercase.test(value) &&
+    hasSpecialChar.test(value)
+  );
+};
 
+// Сообщения для валидации
 const validationMessages = {
-  name: {
-    uppercase: "Name must start with an uppercase letter",
-    required: "Name is required",
+  password: {
+    required: "Password is required",
+    strength:
+      "Password must include at least 1 number, 1 uppercase letter, 1 lowercase letter, and 1 special character",
+  },
+  confirmPassword: {
+    required: "Confirm Password is required",
+    mismatch: "",
+  },
+  terms: {
+    required: "You must accept the terms",
   },
 };
 
@@ -14,24 +34,29 @@ export const schema = yup.object({
   name: yup
     .string()
     .trim()
-    .required(validationMessages.name.required)
+    .required("Name is required")
     .test(
       "is-first-letter-uppercase",
-      validationMessages.name.uppercase,
-      (value) => isFirstLetterUppercase(value || ""),
+      "Name must start with an uppercase letter",
+      (value) => {
+        console.log("Name value during validation:", value);
+        return value && /^[A-Z]/.test(value);
+      },
     ),
-  age: yup.number().required("Age is required").positive().integer(),
-  email: yup.string().email("Invalid email").required("Email is required"),
-  password: yup.string().required("Password is required"),
+  password: yup
+    .string()
+    .required(validationMessages.password.required)
+    .test("password-strength", validationMessages.password.strength, (value) =>
+      passwordStrengthTest(value),
+    ),
   confirmPassword: yup
     .string()
-    .oneOf([yup.ref("password")], "Passwords must match")
-    .required("Confirm Password is required"),
-  gender: yup.string().required("Gender is required"),
+    .required(validationMessages.confirmPassword.required)
+    .oneOf([yup.ref("password")], validationMessages.confirmPassword.mismatch),
   terms: yup
     .boolean()
-    .oneOf([true], "You must accept the terms")
-    .required("You must accept the terms"),
+    .oneOf([true], validationMessages.terms.required)
+    .required(validationMessages.terms.required),
 });
 
 export const validateFormData = async (data: {
@@ -40,11 +65,14 @@ export const validateFormData = async (data: {
   confirmPassword: string;
   terms: boolean;
 }) => {
+  console.log("Validating form data:", data);
   try {
     await schema.validate(data, { abortEarly: false });
+    console.log("Form data is valid");
     return { valid: true, errors: [] };
   } catch (validationError) {
     if (validationError instanceof yup.ValidationError) {
+      console.error("Validation errors:", validationError.errors);
       return { valid: false, errors: validationError.errors };
     }
     console.error("Unexpected validation error:", validationError);
