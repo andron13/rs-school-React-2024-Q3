@@ -1,60 +1,14 @@
-import { ChangeEvent, FormEvent, useRef, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 
-import { schema, validateFormData } from "@/shared/validationSchema.ts";
+import { validateFormData } from "./validationSchemaTest.ts";
 
 export const Test = () => {
-  // refs
   const nameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const confirmPasswordRef = useRef<HTMLInputElement>(null);
   const termsRef = useRef<HTMLInputElement>(null);
 
-  // states
   const [errors, setErrors] = useState<{ [key: string]: string | null }>({});
-  const [canSubmit, setCanSubmit] = useState<boolean>(false);
-
-  const validateField = async (fieldName: string, value: string | boolean) => {
-    try {
-      await schema.validateAt(fieldName, { [fieldName]: value });
-      return null;
-    } catch (err) {
-      return (err as Error).message;
-    }
-  };
-
-  const handleInputChange = async (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-  ) => {
-    const target = e.target as HTMLInputElement;
-    const { name, type, value, checked } = target;
-    const inputValue: string | boolean = type === "checkbox" ? checked : value;
-
-    console.log(`Input Change - Name: ${name}, Value: ${inputValue}`);
-
-    const error = await validateField(name, inputValue);
-
-    console.log(`Validation Error for ${name}:`, error);
-
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      [name]: error,
-    }));
-
-    const formData = {
-      name: nameRef.current?.value || "",
-      password: passwordRef.current?.value || "",
-      confirmPassword: confirmPasswordRef.current?.value || "",
-      terms: termsRef.current?.checked || false,
-    };
-
-    console.log("Form Data on Change:", formData);
-
-    const valid = await validateFormData(formData);
-
-    console.log("Validation Result:", valid);
-
-    setCanSubmit(valid.valid);
-  };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -66,27 +20,23 @@ export const Test = () => {
       terms: termsRef.current?.checked || false,
     };
 
-    console.log("Form Data on Submit:", formData);
+    const validationResult = await validateFormData(formData);
 
-    const valid = await validateFormData(formData);
-
-    console.log("Validation Result on Submit:", valid);
-
-    if (valid.valid) {
+    if (validationResult.valid) {
       console.log("Form submitted successfully!");
+      setErrors({});
     } else {
-      console.error("Form is invalid", valid.errors);
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        ...valid.errors.reduce(
-          (acc, error) => {
-            const [field, message] = error.split(": ");
-            acc[field] = message;
-            return acc;
-          },
-          {} as { [key: string]: string },
-        ),
-      }));
+      const newErrors: { [key: string]: string } = {};
+      validationResult.errors.forEach((error: string) => {
+        if (error.includes("Name")) newErrors.name = error;
+        if (error.includes("Password must include")) newErrors.password = error;
+        if (error.includes("Confirm Password"))
+          newErrors.confirmPassword = error;
+        if (error.includes("must match")) newErrors.confirmPassword = error;
+        if (error.includes("terms")) newErrors.terms = error;
+      });
+
+      setErrors(newErrors);
     }
   };
 
@@ -111,12 +61,15 @@ export const Test = () => {
           name="name"
           type="text"
           ref={nameRef}
-          onChange={handleInputChange}
-          className="rounded-lg border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
-          required
+          className={`rounded-lg border p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+            errors.name ? "border-red-500" : "border-gray-300"
+          }`}
+          // required
           placeholder="Enter your name"
         />
-        {errors.name && <div className="form-error">{errors.name}</div>}
+        {errors.name && (
+          <div className="form-error text-red-600">{errors.name}</div>
+        )}
       </div>
 
       <div className="flex flex-col">
@@ -129,14 +82,17 @@ export const Test = () => {
         <input
           id="password"
           name="password"
-          type="password" // Исправлено с type="text" на type="password"
+          type="password"
           ref={passwordRef}
-          onChange={handleInputChange}
-          className="rounded-lg border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
-          required
+          className={`rounded-lg border p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+            errors.password ? "border-red-500" : "border-gray-300"
+          }`}
+          // required
           placeholder="Enter your password"
         />
-        {errors.password && <div className="form-error">{errors.password}</div>}
+        {errors.password && (
+          <div className="form-error text-red-600">{errors.password}</div>
+        )}
       </div>
 
       <div className="flex flex-col">
@@ -149,15 +105,18 @@ export const Test = () => {
         <input
           id="confirmPassword"
           name="confirmPassword"
-          type="password" // Исправлено с type="text" на type="password"
+          type="password"
           ref={confirmPasswordRef}
-          onChange={handleInputChange}
-          className="rounded-lg border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
-          required
+          className={`rounded-lg border p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+            errors.confirmPassword ? "border-red-500" : "border-gray-300"
+          }`}
+          // required
           placeholder="Confirm your password"
         />
         {errors.confirmPassword && (
-          <div className="form-error">{errors.confirmPassword}</div>
+          <div className="form-error text-red-600">
+            {errors.confirmPassword}
+          </div>
         )}
       </div>
 
@@ -170,21 +129,16 @@ export const Test = () => {
           name="terms"
           type="checkbox"
           ref={termsRef}
-          onChange={handleInputChange}
-          required
-          className="w-3 scale-150 transform"
+          // required
+          className={`w-3 scale-150 transform ${errors.terms ? "border-red-500" : ""}`}
         />
-        {errors.terms && <div className="form-error">{errors.terms}</div>}
+        {errors.terms && (
+          <div className="form-error text-red-600">{errors.terms}</div>
+        )}
       </div>
 
       <div>
-        <button
-          disabled={!canSubmit}
-          type="submit"
-          className={`btn-submit ${
-            canSubmit ? "btn-submit--enabled" : "btn-submit--disabled"
-          }`}
-        >
+        <button type="submit" className="btn-submit btn-submit--enabled">
           Submit
         </button>
       </div>
