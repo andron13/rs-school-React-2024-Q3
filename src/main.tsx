@@ -11,6 +11,6 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ReduxProvider store={store}>
       <App />
-    </ReduxProvider>{" "}
+    </ReduxProvider>
   </StrictMode>,
 );

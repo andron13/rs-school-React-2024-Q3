@@ -1,6 +1,7 @@
 import { ChangeEvent, FormEvent, useRef, useState } from "react";
 
-import { schema, validateFormData } from "@/shared/validationSchema.ts";
+import { Gender } from "@/shared/types";
+import { validateFormData } from "@/shared/validationSchema.ts";
 
 export const UncontrolledForm = () => {
   // refs
@@ -14,68 +15,44 @@ export const UncontrolledForm = () => {
 
   // states
   const [errors, setErrors] = useState<{ [key: string]: string | null }>({});
-  const [canSubmit, setCanSubmit] = useState<boolean>(false);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
-  const validateField = async (fieldName: string, value: any) => {
-    try {
-      await schema.validateAt(fieldName, { [fieldName]: value });
-      return null; // Ошибки нет
-    } catch (err) {
-      return (err as Error).message; // Возвращаем сообщение об ошибке
-    }
-  };
-
-  const handleInputChange = async (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-  ) => {
-    const target = e.target as HTMLInputElement;
-    const { name, type, value, checked } = target;
-    const inputValue: string | boolean = type === "checkbox" ? checked : value;
-
-    console.log(`Input Change - Name: ${name}, Value: ${inputValue}`);
-
-    const error = await validateField(name, inputValue);
-
-    console.log(`Validation Error for ${name}:`, error);
-
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      [name]: error,
-    }));
+  //logic
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
     const formData = {
       name: nameRef.current?.value || "",
+      age: parseInt(ageRef.current?.value || "0"),
+      email: emailRef.current?.value || "",
+      gender: genderRef.current?.value || "",
       password: passwordRef.current?.value || "",
       confirmPassword: confirmPasswordRef.current?.value || "",
       terms: termsRef.current?.checked || false,
     };
 
-    console.log("Form Data on Change:", formData);
+    const validationResult = await validateFormData(formData);
 
-    const valid = await validateFormData(formData);
-
-    console.log("Validation Result:", valid);
-
-    setCanSubmit(valid.valid);
-  };
-
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (canSubmit) {
-      const formData = {
-        name: nameRef.current?.value,
-        age: ageRef.current?.value,
-        email: emailRef.current?.value,
-        password: passwordRef.current?.value,
-        confirmPassword: confirmPasswordRef.current?.value,
-        gender: genderRef.current?.value,
-        terms: termsRef.current?.checked,
-      };
-
-      console.log("Form Data:", formData);
+    if (validationResult.valid) {
       console.log("Form submitted successfully!");
+      setErrors({});
+      setSuccessMessage("Form submitted successfully!"); // Устанавливаем сообщение об успешной отправке
     } else {
-      console.error("Form is invalid");
+      const newErrors: { [key: string]: string } = {};
+      validationResult.errors.forEach((error: string) => {
+        if (error.includes("Name")) newErrors.name = error;
+        if (error.includes("Age")) newErrors.age = error;
+        if (error.includes("Email")) newErrors.email = error; // Обрабатываем ошибку email
+        if (error.includes("Gender")) newErrors.gender = error; // Обрабатываем ошибку gender
+        if (error.includes("Password must include")) newErrors.password = error;
+        if (error.includes("Confirm Password"))
+          newErrors.confirmPassword = error;
+        if (error.includes("must match")) newErrors.confirmPassword = error;
+        if (error.includes("terms")) newErrors.terms = error;
+      });
+
+      setErrors(newErrors);
+      setSuccessMessage(null);
     }
   };
 
@@ -100,12 +77,14 @@ export const UncontrolledForm = () => {
           name="name"
           type="text"
           ref={nameRef}
-          onChange={handleInputChange}
-          className="rounded-lg border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
-          required
+          className={`rounded-lg border p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+            errors.name ? "border-red-500" : "border-gray-300"
+          }`}
           placeholder="Enter your name"
         />
-        {errors.name && <div className="form-error">{errors.name}</div>}
+        {errors.name && (
+          <div className="form-error text-red-600">{errors.name}</div>
+        )}
       </div>
 
       <div className="flex flex-col">
@@ -117,9 +96,7 @@ export const UncontrolledForm = () => {
           name="age"
           type="number"
           ref={ageRef}
-          onChange={handleInputChange}
           className="rounded-lg border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
-          required
           placeholder="Enter your age"
         />
         {errors.age && <div className="form-error">{errors.age}</div>}
@@ -137,9 +114,7 @@ export const UncontrolledForm = () => {
           name="email"
           type="email"
           ref={emailRef}
-          onChange={handleInputChange}
           className="rounded-lg border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
-          required
           placeholder="Enter your email"
         />
         {errors.email && <div className="form-error">{errors.email}</div>}
@@ -155,14 +130,16 @@ export const UncontrolledForm = () => {
         <input
           id="password"
           name="password"
-          type="text"
+          type="password"
           ref={passwordRef}
-          onChange={handleInputChange}
-          className="rounded-lg border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
-          required
+          className={`rounded-lg border p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+            errors.password ? "border-red-500" : "border-gray-300"
+          }`}
           placeholder="Enter your password"
         />
-        {errors.password && <div className="form-error">{errors.password}</div>}
+        {errors.password && (
+          <div className="form-error text-red-600">{errors.password}</div>
+        )}
       </div>
 
       <div className="flex flex-col">
@@ -175,15 +152,17 @@ export const UncontrolledForm = () => {
         <input
           id="confirmPassword"
           name="confirmPassword"
-          type="text"
+          type="password"
           ref={confirmPasswordRef}
-          onChange={handleInputChange}
-          className="rounded-lg border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
-          required
+          className={`rounded-lg border p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+            errors.confirmPassword ? "border-red-500" : "border-gray-300"
+          }`}
           placeholder="Confirm your password"
         />
         {errors.confirmPassword && (
-          <div className="form-error">{errors.confirmPassword}</div>
+          <div className="form-error text-red-600">
+            {errors.confirmPassword}
+          </div>
         )}
       </div>
 
@@ -198,14 +177,12 @@ export const UncontrolledForm = () => {
           id="gender"
           name="gender"
           ref={genderRef}
-          onChange={handleInputChange}
           className="rounded-lg border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
-          required
         >
           <option value="">Select Gender</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="other">Other</option>
+          <option value={Gender.Male}>{Gender.Male}</option>
+          <option value={Gender.Female}>{Gender.Female}</option>
+          <option value={Gender.Diverses}>{Gender.Diverses}</option>
         </select>
         {errors.gender && <div className="form-error">{errors.gender}</div>}
       </div>
@@ -219,24 +196,21 @@ export const UncontrolledForm = () => {
           name="terms"
           type="checkbox"
           ref={termsRef}
-          onChange={handleInputChange}
-          required
-          className="w-3 scale-150 transform"
+          className={`w-3 scale-150 transform ${errors.terms ? "border-red-500" : ""}`}
         />
-        {errors.terms && <div className="form-error">{errors.terms}</div>}
+        {errors.terms && (
+          <div className="form-error text-red-600">{errors.terms}</div>
+        )}
       </div>
 
       <div>
-        <button
-          disabled={!canSubmit}
-          type="submit"
-          className={`btn-submit ${
-            canSubmit ? "btn-submit--enabled" : "btn-submit--disabled"
-          }`}
-        >
+        <button type="submit" className="btn-submit btn-submit--enabled">
           Submit
         </button>
       </div>
+      {successMessage && (
+        <div className="text-center text-green-600">{successMessage}</div>
+      )}
     </form>
   );
 };
