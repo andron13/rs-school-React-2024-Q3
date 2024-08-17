@@ -3,6 +3,10 @@ export enum Gender {
   Female = "female",
   Diverses = "diverses",
 }
+export type Country = {
+  code: string;
+  name: string;
+};
 
 export type UncontrolledFormData = {
   name: string;
@@ -13,4 +17,5 @@ export type UncontrolledFormData = {
   terms?: boolean;
   gender?: Gender;
   image?: File;
+  country: Country;
 };

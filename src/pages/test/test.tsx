@@ -1,21 +1,25 @@
 import { FormEvent, useRef, useState } from "react";
+import Select from "react-select";
 
-import { UncontrolledFormData } from "@/shared/types";
+import { countries } from "@/shared";
+import { Country, UncontrolledFormData } from "@/shared/types";
 
 import { validateFormData } from "./validationSchemaTest.ts";
 
 export const Test = () => {
   const nameRef = useRef<HTMLInputElement>(null);
-  const imageRef = useRef<HTMLInputElement>(null);
+  const countryRef = useRef<Country | null>(null);
 
   const [errors, setErrors] = useState<{ [key: string]: string | null }>({});
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    const selectedCountry = countryRef.current || { code: "", name: "" };
+
     const formData: UncontrolledFormData = {
       name: nameRef.current?.value || "",
-      image: imageRef.current?.files?.[0] || undefined,
+      country: selectedCountry,
     };
 
     const validationResult = await validateFormData(formData);
@@ -27,11 +31,23 @@ export const Test = () => {
       const newErrors: { [key: string]: string } = {};
       validationResult.errors.forEach((error: string) => {
         if (error.includes("Name")) newErrors.name = error;
-        if (error.includes("Image")) newErrors.image = error;
-        // Other error handling logic
+        if (error.includes("Country")) newErrors.country = error;
       });
 
       setErrors(newErrors);
+    }
+  };
+
+  const handleCountryChange = (
+    selectedOption: { value: string; label: string } | null,
+  ) => {
+    if (selectedOption) {
+      const selectedCountry = countries.find(
+        (country) => country.code === selectedOption.value,
+      ) || { code: "", name: "" };
+      countryRef.current = selectedCountry;
+    } else {
+      countryRef.current = null;
     }
   };
 
@@ -68,23 +84,25 @@ export const Test = () => {
 
       <div className="flex flex-col">
         <label
-          htmlFor="image"
+          htmlFor="country"
           className="mb-2 text-lg font-medium text-gray-800"
         >
-          Upload Image
+          Country
         </label>
-        <input
-          id="image"
-          name="image"
-          type="file"
-          ref={imageRef}
-          accept=".png, .jpeg, .jpg"
-          className={`rounded-lg border p-3 focus:outline-none ${
-            errors.image ? "border-red-500" : "border-gray-300"
+        <Select
+          id="country"
+          name="country"
+          onChange={handleCountryChange}
+          options={countries.map((country: Country) => ({
+            value: country.code,
+            label: country.name,
+          }))}
+          className={`rounded-lg border p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+            errors.country ? "border-red-500" : "border-gray-300"
           }`}
         />
-        {errors.image && (
-          <div className="form-error text-red-600">{errors.image}</div>
+        {errors.country && (
+          <div className="form-error text-red-600">{errors.country}</div>
         )}
       </div>
 

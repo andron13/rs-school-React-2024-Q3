@@ -1,7 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 
+import countryReducer from "./countrySlice";
+
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    country: countryReducer,
+  },
 });
 
 export type AppDispatch = typeof store.dispatch;
