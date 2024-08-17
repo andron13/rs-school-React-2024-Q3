@@ -1,9 +1,36 @@
-import { ChangeEvent, FormEvent, useRef, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import Select from "react-select";
 
-import { Gender, UncontrolledFormData } from "@/shared/types";
+import { RootState, selectCountries } from "@/shared/store";
+import { setUncontrolledFormData } from "@/shared/store/formSlice.ts";
+import {
+  Country,
+  FormDataInRedux,
+  Gender,
+  UncontrolledFormData,
+} from "@/shared/types";
 import { validateFormData } from "@/shared/validationSchema.ts";
 
+function fileToBase64(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = (error) => reject(error);
+  });
+}
+
+function parseGender(value: string): Gender | undefined {
+  return Object.values(Gender).includes(value as Gender)
+    ? (value as Gender)
+    : undefined;
+}
+
 export const UncontrolledForm = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   // refs
   const nameRef = useRef<HTMLInputElement>(null);
   const ageRef = useRef<HTMLInputElement>(null);
@@ -13,20 +40,23 @@ export const UncontrolledForm = () => {
   const genderRef = useRef<HTMLSelectElement>(null);
   const termsRef = useRef<HTMLInputElement>(null);
   const imageRef = useRef<HTMLInputElement>(null);
+  const countryRef = useRef<Country | null>(null);
+  //
+  const countries = useSelector((state: RootState) => selectCountries(state));
 
   // states
   const [errors, setErrors] = useState<{ [key: string]: string | null }>({});
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   //logic
-  function parseGender(value: string): Gender | undefined {
-    return Object.values(Gender).includes(value as Gender)
-      ? (value as Gender)
-      : undefined;
-  }
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    let imageBase64: string | undefined = undefined;
+
+    if (imageRef.current?.files?.[0]) {
+      imageBase64 = await fileToBase64(imageRef.current.files[0]);
+    }
 
     const formData: UncontrolledFormData = {
       name: nameRef.current?.value || "",
@@ -37,6 +67,7 @@ export const UncontrolledForm = () => {
       confirmPassword: confirmPasswordRef.current?.value || "",
       terms: termsRef.current?.checked || false,
       image: imageRef.current?.files?.[0] || undefined,
+      country: countryRef.current || { code: "", name: "" },
     };
 
     const validationResult = await validateFormData(formData);
@@ -48,6 +79,19 @@ export const UncontrolledForm = () => {
       console.groupEnd();
       setErrors({});
       setSuccessMessage("Form submitted successfully!");
+
+      const formDataForRedux: FormDataInRedux = {
+        ...formData,
+        gender: formData.gender || "",
+        image: imageBase64 || "",
+        terms: formData.terms || false,
+        timestamp: Date.now(),
+      };
+
+      dispatch(setUncontrolledFormData(formDataForRedux));
+      setTimeout(() => {
+        navigate("/");
+      }, 700);
     } else {
       const newErrors: { [key: string]: string } = {};
       validationResult.errors.forEach((error: string) => {
@@ -61,13 +105,26 @@ export const UncontrolledForm = () => {
         if (error.includes("must match")) newErrors.confirmPassword = error;
         if (error.includes("terms")) newErrors.terms = error;
         if (error.includes("Image")) newErrors.image = error;
+        // Country don't need to be validated
+        if (error.includes("Country")) newErrors.country = error;
       });
 
       setErrors(newErrors);
       setSuccessMessage(null);
     }
   };
-
+  const handleCountryChange = (
+    selectedOption: { value: string; label: string } | null,
+  ) => {
+    const selectedCountry = countries.find(
+      (country: Country) => country.code === selectedOption.value,
+    ) || { code: "", name: "" };
+    if (selectedOption) {
+      countryRef.current = selectedCountry;
+    } else {
+      countryRef.current = null;
+    }
+  };
   return (
     <form
       onSubmit={handleSubmit}
@@ -234,6 +291,29 @@ export const UncontrolledForm = () => {
         />
         {errors.terms && (
           <div className="form-error text-red-600">{errors.terms}</div>
+        )}
+      </div>
+      <div className="flex flex-col">
+        <label
+          htmlFor="country"
+          className="mb-2 text-lg font-medium text-gray-800"
+        >
+          Country
+        </label>
+        <Select
+          id="country"
+          name="country"
+          onChange={handleCountryChange}
+          options={countries.map((country: Country) => ({
+            value: country.code,
+            label: country.name,
+          }))}
+          className={`rounded-lg border p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+            errors.country ? "border-red-500" : "border-gray-300"
+          }`}
+        />
+        {errors.country && (
+          <div className="form-error text-red-600">{errors.country}</div>
         )}
       </div>
 

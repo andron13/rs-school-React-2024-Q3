@@ -1,4 +1,4 @@
-import { Country } from "@/shared/types/types.tsx";
+import { Country } from "@/shared/types";
 
 export const countries: Country[] = [
   { code: "AD", name: "Andorra" },
@@ -37,6 +37,7 @@ export const countries: Country[] = [
   { code: "CY", name: "Cyprus" },
   { code: "CZ", name: "Czech Republic" },
   { code: "DJ", name: "Djibouti" },
+  { code: "DE", name: "Germany" },
   { code: "DM", name: "Dominica" },
   { code: "DO", name: "Dominican Republic" },
   { code: "DK", name: "Denmark" },

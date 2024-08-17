@@ -1,7 +1,8 @@
 import { FormEvent, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import Select from "react-select";
 
-import { countries } from "@/shared";
+import { RootState, selectCountries } from "@/shared/store";
 import { Country, UncontrolledFormData } from "@/shared/types";
 
 import { validateFormData } from "./validationSchemaTest.ts";
@@ -9,6 +10,7 @@ import { validateFormData } from "./validationSchemaTest.ts";
 export const Test = () => {
   const nameRef = useRef<HTMLInputElement>(null);
   const countryRef = useRef<Country | null>(null);
+  const countries = useSelector((state: RootState) => selectCountries(state));
 
   const [errors, setErrors] = useState<{ [key: string]: string | null }>({});
 
@@ -41,10 +43,10 @@ export const Test = () => {
   const handleCountryChange = (
     selectedOption: { value: string; label: string } | null,
   ) => {
+    const selectedCountry = countries.find(
+      (country: Country) => country.code === selectedOption.value,
+    ) || { code: "", name: "" };
     if (selectedOption) {
-      const selectedCountry = countries.find(
-        (country) => country.code === selectedOption.value,
-      ) || { code: "", name: "" };
       countryRef.current = selectedCountry;
     } else {
       countryRef.current = null;

@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-import { UncontrolledFormData } from "@/shared/types";
+import { Country, UncontrolledFormData } from "@/shared/types";
 
 // image start
 
