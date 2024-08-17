@@ -88,10 +88,8 @@ export const schema = yup.object({
 });
 
 export const validateFormData = async (data: CustomFormData) => {
-  // console.log("Validating form data:", data);
   try {
     await schema.validate(data, { abortEarly: false });
-    // console.log("Form data is valid");
     return { valid: true, errors: [] };
   } catch (validationError) {
     if (validationError instanceof yup.ValidationError) {

@@ -44,11 +44,6 @@ export const ReactHookForm = () => {
     });
 
     if (validationResult.valid) {
-      console.group();
-      console.log("Form submitted successfully!");
-      console.log({ ...data, image: imageBase64 });
-      console.groupEnd();
-
       clearErrors();
       setSuccessMessage("Form submitted successfully!");
 

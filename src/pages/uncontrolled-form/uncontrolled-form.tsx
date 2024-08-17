@@ -62,10 +62,6 @@ export const UncontrolledForm = () => {
     const validationResult = await validateFormData(formData);
 
     if (validationResult.valid) {
-      console.group();
-      console.log("Form submitted successfully!");
-      console.log({ formData });
-      console.groupEnd();
       setErrors({});
       setSuccessMessage("Form submitted successfully!");
 
