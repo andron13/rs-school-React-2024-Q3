@@ -1,16 +1,20 @@
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Select from "react-select";
 
-import { validateFormData } from "@/pages/test/validationSchemaTest.ts";
+import { fileToBase64 } from "@/shared/const";
 import {
   RootState,
   selectCountries,
   setControlledFormData,
 } from "@/shared/store";
-import { CustomFormData, Gender } from "@/shared/types";
+import { Country, CustomFormData, Gender } from "@/shared/types";
+import { validateFormData } from "@/shared/validationSchema.ts";
 
 export const ReactHookForm = () => {
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const countries = useSelector((state: RootState) => selectCountries(state));
@@ -24,19 +28,19 @@ export const ReactHookForm = () => {
   } = useForm<CustomFormData>();
 
   const onSubmit = async (data: CustomFormData) => {
-    const imageBase64: string | undefined = undefined;
+    let imageBase64: string | undefined = undefined;
 
-    // if (data.image && data.image.length > 0) {
-    //   try {
-    //     imageBase64 = await fileToBase64(data.image[0]);
-    //   } catch (error) {
-    //     console.error("Error reading image file", error);
-    //   }
-    // }
+    if (data.image) {
+      try {
+        imageBase64 = await fileToBase64(data.image);
+      } catch (error) {
+        console.error("Error reading image file", error);
+      }
+    }
 
     const validationResult = await validateFormData({
       ...data,
-      image: data.image ? data.image[0] : undefined,
+      image: data.image,
     });
 
     if (validationResult.valid) {
@@ -46,6 +50,8 @@ export const ReactHookForm = () => {
       console.groupEnd();
 
       clearErrors();
+      setSuccessMessage("Form submitted successfully!");
+
       dispatch(
         setControlledFormData({
           ...data,
@@ -75,6 +81,7 @@ export const ReactHookForm = () => {
         // Country doesn't need to be validated
         if (error.includes("Country")) setError("country", { message: error });
       });
+      setSuccessMessage(null);
     }
   };
 
@@ -249,12 +256,107 @@ export const ReactHookForm = () => {
           <div className="form-error">{errors.gender.message}</div>
         )}
       </div>
+      <div className="flex flex-col">
+        <label
+          htmlFor="image"
+          className="mb-2 text-lg font-medium text-gray-800"
+        >
+          Upload Image
+        </label>
+        <Controller
+          name="image"
+          control={control}
+          defaultValue={undefined}
+          render={({ field }) => (
+            <input
+              id="image"
+              type="file"
+              accept=".png, .jpeg, .jpg"
+              onChange={(e) =>
+                field.onChange(e.target.files ? e.target.files[0] : undefined)
+              }
+              className={`rounded-lg border p-3 focus:outline-none ${
+                errors.image ? "border-red-500" : "border-gray-300"
+              }`}
+            />
+          )}
+        />
+        {errors.image && (
+          <div className="form-error text-red-600">{errors.image.message}</div>
+        )}
+      </div>
+      <div className="flex flex-col">
+        <label
+          htmlFor="country"
+          className="mb-2 text-lg font-medium text-gray-800"
+        >
+          Country
+        </label>
+        <Controller
+          name="country"
+          control={control}
+          defaultValue={null}
+          render={({ field }) => (
+            <Select
+              id="country"
+              {...field}
+              options={countries.map((country: Country) => ({
+                value: country.code,
+                label: country.name,
+                ...country,
+              }))}
+              className={`rounded-lg border p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+                errors.country ? "border-red-500" : "border-gray-300"
+              }`}
+              isClearable={true}
+              placeholder="Select or enter country"
+              onChange={(selectedOption) => field.onChange(selectedOption)}
+              getOptionLabel={(option) => option.name}
+              getOptionValue={(option) => option.code}
+            />
+          )}
+        />
+
+        {errors.country && (
+          <div className="form-error text-red-600">
+            {errors.country.message}
+          </div>
+        )}
+      </div>
+
+      <div className="flex flex-col">
+        <div className="flex items-center gap-6">
+          <label htmlFor="terms" className="text-lg font-medium text-gray-800">
+            Accept Terms and Conditions
+          </label>
+          <Controller
+            name="terms"
+            control={control}
+            defaultValue={false}
+            render={({ field }) => (
+              <input
+                id="terms"
+                type="checkbox"
+                checked={field.value}
+                onChange={(e) => field.onChange(e.target.checked)}
+                className={`h-5 w-5 ${errors.terms ? "border-red-500" : ""}`}
+              />
+            )}
+          />
+        </div>
+        {errors.terms && (
+          <div className="form-error text-red-600">{errors.terms.message}</div>
+        )}
+      </div>
 
       <div>
         <button type="submit" className="btn-submit btn-submit--enabled">
           Submit
         </button>
       </div>
+      {successMessage && (
+        <div className="text-center text-green-600">{successMessage}</div>
+      )}
     </form>
   );
 };

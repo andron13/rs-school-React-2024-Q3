@@ -1,16 +1,23 @@
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Select from "react-select";
 
 import { validateFormData } from "@/pages/test/validationSchemaTest.ts";
-import { RootState, selectCountries } from "@/shared/store";
-import { setUncontrolledFormData } from "@/shared/store/formSlice.ts";
-import { CustomFormData, Gender } from "@/shared/types";
+import {
+  RootState,
+  selectCountries,
+  setControlledFormData,
+} from "@/shared/store";
+import { Country, CustomFormData } from "@/shared/types";
 
 export const Test = () => {
+  const countries = useSelector((state: RootState) => selectCountries(state));
+
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const countries = useSelector((state: RootState) => selectCountries(state));
 
   const {
     control,
@@ -23,28 +30,19 @@ export const Test = () => {
   const onSubmit = async (data: CustomFormData) => {
     const imageBase64: string | undefined = undefined;
 
-    // if (data.image && data.image.length > 0) {
-    //   try {
-    //     imageBase64 = await fileToBase64(data.image[0]);
-    //   } catch (error) {
-    //     console.error("Error reading image file", error);
-    //   }
-    // }
-
     const validationResult = await validateFormData({
       ...data,
-      image: data.image ? data.image[0] : undefined,
     });
 
     if (validationResult.valid) {
       console.group();
       console.log("Form submitted successfully!");
-      console.log({ ...data, image: imageBase64 });
       console.groupEnd();
 
       clearErrors();
+      setSuccessMessage("Form submitted successfully!");
       dispatch(
-        setUncontrolledFormData({
+        setControlledFormData({
           ...data,
           gender: data.gender || "",
           image: imageBase64 || "",
@@ -58,22 +56,17 @@ export const Test = () => {
     } else {
       validationResult.errors.forEach((error: string) => {
         if (error.includes("Name")) setError("name", { message: error });
-        if (error.includes("Age")) setError("age", { message: error });
-        if (error.includes("Email")) setError("email", { message: error });
-        if (error.includes("Gender")) setError("gender", { message: error });
-        if (error.includes("Password must include"))
-          setError("password", { message: error });
-        if (error.includes("Confirm Password"))
-          setError("confirmPassword", { message: error });
-        if (error.includes("must match"))
-          setError("confirmPassword", { message: error });
         if (error.includes("terms")) setError("terms", { message: error });
-        if (error.includes("Image")) setError("image", { message: error });
-        // Country doesn't need to be validated
-        if (error.includes("Country")) setError("country", { message: error });
       });
+      setSuccessMessage(null);
     }
   };
+
+  // Преобразование данных из Redux в формат для Select
+  const countryOptions = countries.map((country: Country) => ({
+    value: country.code,
+    label: country.name,
+  }));
 
   return (
     <form
@@ -112,146 +105,51 @@ export const Test = () => {
       </div>
 
       <div className="flex flex-col">
-        <label htmlFor="age" className="mb-2 text-lg font-medium text-gray-800">
-          Age
-        </label>
-        <Controller
-          name="age"
-          control={control}
-          defaultValue={0}
-          render={({ field }) => (
-            <input
-              id="age"
-              type="number"
-              {...field}
-              className="rounded-lg border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
-              placeholder="Enter your age"
-            />
-          )}
-        />
-        {errors.age && <div className="form-error">{errors.age.message}</div>}
-      </div>
-
-      <div className="flex flex-col">
         <label
-          htmlFor="email"
+          htmlFor="country"
           className="mb-2 text-lg font-medium text-gray-800"
         >
-          Email
+          Country
         </label>
         <Controller
-          name="email"
+          name="country"
           control={control}
-          defaultValue=""
+          defaultValue={null}
           render={({ field }) => (
-            <input
-              id="email"
-              type="email"
+            <Select
+              id="country"
               {...field}
-              className="rounded-lg border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
-              placeholder="Enter your email"
-            />
-          )}
-        />
-        {errors.email && (
-          <div className="form-error">{errors.email.message}</div>
-        )}
-      </div>
-
-      <div className="flex flex-col">
-        <label
-          htmlFor="password"
-          className="mb-2 text-lg font-medium text-gray-800"
-        >
-          Password
-        </label>
-        <Controller
-          name="password"
-          control={control}
-          defaultValue=""
-          render={({ field }) => (
-            <input
-              id="password"
-              type="password"
-              {...field}
+              options={countries.map((country: Country) => ({
+                value: country.code,
+                label: country.name,
+                ...country,
+              }))}
               className={`rounded-lg border p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
-                errors.password ? "border-red-500" : "border-gray-300"
+                errors.country ? "border-red-500" : "border-gray-300"
               }`}
-              placeholder="Enter your password"
+              isClearable={true}
+              placeholder="Select or enter country"
+              onChange={(selectedOption) => field.onChange(selectedOption)}
+              getOptionLabel={(option) => option.name}
+              getOptionValue={(option) => option.code}
             />
           )}
         />
-        {errors.password && (
+
+        {errors.country && (
           <div className="form-error text-red-600">
-            {errors.password.message}
+            {errors.country.message}
           </div>
         )}
       </div>
 
-      <div className="flex flex-col">
-        <label
-          htmlFor="confirmPassword"
-          className="mb-2 text-lg font-medium text-gray-800"
-        >
-          Confirm Password
-        </label>
-        <Controller
-          name="confirmPassword"
-          control={control}
-          defaultValue=""
-          render={({ field }) => (
-            <input
-              id="confirmPassword"
-              type="password"
-              {...field}
-              className={`rounded-lg border p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
-                errors.confirmPassword ? "border-red-500" : "border-gray-300"
-              }`}
-              placeholder="Confirm your password"
-            />
-          )}
-        />
-        {errors.confirmPassword && (
-          <div className="form-error text-red-600">
-            {errors.confirmPassword.message}
-          </div>
-        )}
-      </div>
+      <button type="submit" className="btn-submit btn-submit--enabled">
+        Submit
+      </button>
 
-      <div className="flex flex-col">
-        <label
-          htmlFor="gender"
-          className="mb-2 text-lg font-medium text-gray-800"
-        >
-          Gender
-        </label>
-        <Controller
-          name="gender"
-          control={control}
-          defaultValue={undefined}
-          render={({ field }) => (
-            <select
-              id="gender"
-              {...field}
-              className="rounded-lg border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            >
-              <option value="">Select Gender</option>
-              <option value={Gender.Male}>{Gender.Male}</option>
-              <option value={Gender.Female}>{Gender.Female}</option>
-              <option value={Gender.Diverses}>{Gender.Diverses}</option>
-            </select>
-          )}
-        />
-        {errors.gender && (
-          <div className="form-error">{errors.gender.message}</div>
-        )}
-      </div>
-
-      <div>
-        <button type="submit" className="btn-submit btn-submit--enabled">
-          Submit
-        </button>
-      </div>
+      {successMessage && (
+        <div className="text-center text-green-600">{successMessage}</div>
+      )}
     </form>
   );
 };

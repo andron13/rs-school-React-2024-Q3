@@ -41,6 +41,10 @@ export const schema = yup.object({
   //     }
   //     return false;
   //   }),
+  // terms: yup
+  //   .boolean()
+  //   .oneOf([true], "You must accept the terms")
+  //   .required("You must accept the terms"),
 });
 
 export const validateFormData = async (data: CustomFormData) => {
