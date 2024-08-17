@@ -1,23 +1,21 @@
 import { FormEvent, useRef, useState } from "react";
 
+import { UncontrolledFormData } from "@/shared/types";
+
 import { validateFormData } from "./validationSchemaTest.ts";
 
 export const Test = () => {
   const nameRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
-  const confirmPasswordRef = useRef<HTMLInputElement>(null);
-  const termsRef = useRef<HTMLInputElement>(null);
+  const imageRef = useRef<HTMLInputElement>(null);
 
   const [errors, setErrors] = useState<{ [key: string]: string | null }>({});
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const formData = {
+    const formData: UncontrolledFormData = {
       name: nameRef.current?.value || "",
-      password: passwordRef.current?.value || "",
-      confirmPassword: confirmPasswordRef.current?.value || "",
-      terms: termsRef.current?.checked || false,
+      image: imageRef.current?.files?.[0] || undefined,
     };
 
     const validationResult = await validateFormData(formData);
@@ -29,11 +27,8 @@ export const Test = () => {
       const newErrors: { [key: string]: string } = {};
       validationResult.errors.forEach((error: string) => {
         if (error.includes("Name")) newErrors.name = error;
-        if (error.includes("Password must include")) newErrors.password = error;
-        if (error.includes("Confirm Password"))
-          newErrors.confirmPassword = error;
-        if (error.includes("must match")) newErrors.confirmPassword = error;
-        if (error.includes("terms")) newErrors.terms = error;
+        if (error.includes("Image")) newErrors.image = error;
+        // Other error handling logic
       });
 
       setErrors(newErrors);
@@ -64,7 +59,6 @@ export const Test = () => {
           className={`rounded-lg border p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
             errors.name ? "border-red-500" : "border-gray-300"
           }`}
-          // required
           placeholder="Enter your name"
         />
         {errors.name && (
@@ -74,66 +68,23 @@ export const Test = () => {
 
       <div className="flex flex-col">
         <label
-          htmlFor="password"
+          htmlFor="image"
           className="mb-2 text-lg font-medium text-gray-800"
         >
-          Password
+          Upload Image
         </label>
         <input
-          id="password"
-          name="password"
-          type="password"
-          ref={passwordRef}
-          className={`rounded-lg border p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
-            errors.password ? "border-red-500" : "border-gray-300"
+          id="image"
+          name="image"
+          type="file"
+          ref={imageRef}
+          accept=".png, .jpeg, .jpg"
+          className={`rounded-lg border p-3 focus:outline-none ${
+            errors.image ? "border-red-500" : "border-gray-300"
           }`}
-          // required
-          placeholder="Enter your password"
         />
-        {errors.password && (
-          <div className="form-error text-red-600">{errors.password}</div>
-        )}
-      </div>
-
-      <div className="flex flex-col">
-        <label
-          htmlFor="confirmPassword"
-          className="mb-2 text-lg font-medium text-gray-800"
-        >
-          Confirm Password
-        </label>
-        <input
-          id="confirmPassword"
-          name="confirmPassword"
-          type="password"
-          ref={confirmPasswordRef}
-          className={`rounded-lg border p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
-            errors.confirmPassword ? "border-red-500" : "border-gray-300"
-          }`}
-          // required
-          placeholder="Confirm your password"
-        />
-        {errors.confirmPassword && (
-          <div className="form-error text-red-600">
-            {errors.confirmPassword}
-          </div>
-        )}
-      </div>
-
-      <div className="flex items-center gap-6">
-        <label htmlFor="terms" className="text-lg font-medium text-gray-800">
-          Accept Terms and Conditions
-        </label>
-        <input
-          id="terms"
-          name="terms"
-          type="checkbox"
-          ref={termsRef}
-          // required
-          className={`w-3 scale-150 transform ${errors.terms ? "border-red-500" : ""}`}
-        />
-        {errors.terms && (
-          <div className="form-error text-red-600">{errors.terms}</div>
+        {errors.image && (
+          <div className="form-error text-red-600">{errors.image}</div>
         )}
       </div>
 

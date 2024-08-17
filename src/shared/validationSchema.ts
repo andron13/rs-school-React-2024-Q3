@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-import { Gender } from "@/shared/types";
+import { Gender, UncontrolledFormData } from "@/shared/types";
 
 const isFirstLetterUppercase = (value: string) =>
   value.length > 0 && value[0] === value[0].toUpperCase();
@@ -17,6 +17,15 @@ const passwordStrengthTest = (value: string) => {
     hasSpecialChar.test(value)
   );
 };
+
+// image start
+const MAX_FILE_SIZE: number = 5 * 1024 * 1024; // 5 MB
+const validFileTypes = ["image/jpeg", "image/png"];
+
+function isValidFileType(fileType: string) {
+  return validFileTypes.includes(fileType);
+}
+// image end
 
 export const schema = yup.object({
   name: yup
@@ -61,14 +70,24 @@ export const schema = yup.object({
     .boolean()
     .oneOf([true], "You must accept the terms")
     .required("You must accept the terms"),
+  image: yup
+    .mixed()
+    .required("Image is required")
+    .test("is-valid-type", "Image is not a valid image type", (value) => {
+      if (value && (value as File).type) {
+        return isValidFileType((value as File).type);
+      }
+      return false;
+    })
+    .test("is-valid-size", "Image max allowed size is 5MB", (value) => {
+      if (value && (value as File).size) {
+        return (value as File).size <= MAX_FILE_SIZE;
+      }
+      return false;
+    }),
 });
 
-export const validateFormData = async (data: {
-  name: string;
-  password: string;
-  confirmPassword: string;
-  terms: boolean;
-}) => {
+export const validateFormData = async (data: UncontrolledFormData) => {
   // console.log("Validating form data:", data);
   try {
     await schema.validate(data, { abortEarly: false });

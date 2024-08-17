@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useRef, useState } from "react";
 
-import { Gender } from "@/shared/types";
+import { Gender, UncontrolledFormData } from "@/shared/types";
 import { validateFormData } from "@/shared/validationSchema.ts";
 
 export const UncontrolledForm = () => {
@@ -12,43 +12,55 @@ export const UncontrolledForm = () => {
   const confirmPasswordRef = useRef<HTMLInputElement>(null);
   const genderRef = useRef<HTMLSelectElement>(null);
   const termsRef = useRef<HTMLInputElement>(null);
+  const imageRef = useRef<HTMLInputElement>(null);
 
   // states
   const [errors, setErrors] = useState<{ [key: string]: string | null }>({});
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   //logic
+  function parseGender(value: string): Gender | undefined {
+    return Object.values(Gender).includes(value as Gender)
+      ? (value as Gender)
+      : undefined;
+  }
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const formData = {
+    const formData: UncontrolledFormData = {
       name: nameRef.current?.value || "",
       age: parseInt(ageRef.current?.value || "0"),
       email: emailRef.current?.value || "",
-      gender: genderRef.current?.value || "",
+      gender: parseGender(genderRef.current?.value || ""),
       password: passwordRef.current?.value || "",
       confirmPassword: confirmPasswordRef.current?.value || "",
       terms: termsRef.current?.checked || false,
+      image: imageRef.current?.files?.[0] || undefined,
     };
 
     const validationResult = await validateFormData(formData);
 
     if (validationResult.valid) {
+      console.group();
       console.log("Form submitted successfully!");
+      console.log({ formData });
+      console.groupEnd();
       setErrors({});
-      setSuccessMessage("Form submitted successfully!"); // Устанавливаем сообщение об успешной отправке
+      setSuccessMessage("Form submitted successfully!");
     } else {
       const newErrors: { [key: string]: string } = {};
       validationResult.errors.forEach((error: string) => {
         if (error.includes("Name")) newErrors.name = error;
         if (error.includes("Age")) newErrors.age = error;
-        if (error.includes("Email")) newErrors.email = error; // Обрабатываем ошибку email
-        if (error.includes("Gender")) newErrors.gender = error; // Обрабатываем ошибку gender
+        if (error.includes("Email")) newErrors.email = error;
+        if (error.includes("Gender")) newErrors.gender = error;
         if (error.includes("Password must include")) newErrors.password = error;
         if (error.includes("Confirm Password"))
           newErrors.confirmPassword = error;
         if (error.includes("must match")) newErrors.confirmPassword = error;
         if (error.includes("terms")) newErrors.terms = error;
+        if (error.includes("Image")) newErrors.image = error;
       });
 
       setErrors(newErrors);
@@ -185,6 +197,28 @@ export const UncontrolledForm = () => {
           <option value={Gender.Diverses}>{Gender.Diverses}</option>
         </select>
         {errors.gender && <div className="form-error">{errors.gender}</div>}
+      </div>
+
+      <div className="flex flex-col">
+        <label
+          htmlFor="image"
+          className="mb-2 text-lg font-medium text-gray-800"
+        >
+          Upload Image
+        </label>
+        <input
+          id="image"
+          name="image"
+          type="file"
+          ref={imageRef}
+          accept=".png, .jpeg, .jpg"
+          className={`rounded-lg border p-3 focus:outline-none ${
+            errors.image ? "border-red-500" : "border-gray-300"
+          }`}
+        />
+        {errors.image && (
+          <div className="form-error text-red-600">{errors.image}</div>
+        )}
       </div>
 
       <div className="flex items-center gap-6">
