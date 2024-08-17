@@ -3,30 +3,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 
-import { RootState, selectCountries } from "@/shared/store";
-import { setUncontrolledFormData } from "@/shared/store/formSlice.ts";
+import { fileToBase64, parseGender } from "@/shared/const";
+import {
+  RootState,
+  selectCountries,
+  setUncontrolledFormData,
+} from "@/shared/store";
 import {
   Country,
+  CustomFormData,
   FormDataInRedux,
   Gender,
-  UncontrolledFormData,
 } from "@/shared/types";
 import { validateFormData } from "@/shared/validationSchema.ts";
-
-function fileToBase64(file: File): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result as string);
-    reader.onerror = (error) => reject(error);
-  });
-}
-
-function parseGender(value: string): Gender | undefined {
-  return Object.values(Gender).includes(value as Gender)
-    ? (value as Gender)
-    : undefined;
-}
 
 export const UncontrolledForm = () => {
   const dispatch = useDispatch();
@@ -58,7 +47,7 @@ export const UncontrolledForm = () => {
       imageBase64 = await fileToBase64(imageRef.current.files[0]);
     }
 
-    const formData: UncontrolledFormData = {
+    const formData: CustomFormData = {
       name: nameRef.current?.value || "",
       age: parseInt(ageRef.current?.value || "0"),
       email: emailRef.current?.value || "",
@@ -311,6 +300,8 @@ export const UncontrolledForm = () => {
           className={`rounded-lg border p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
             errors.country ? "border-red-500" : "border-gray-300"
           }`}
+          isClearable={true}
+          placeholder="Select or enter country"
         />
         {errors.country && (
           <div className="form-error text-red-600">{errors.country}</div>

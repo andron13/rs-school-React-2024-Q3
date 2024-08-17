@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-import { Gender, UncontrolledFormData } from "@/shared/types";
+import { CustomFormData, Gender } from "@/shared/types";
 
 const isFirstLetterUppercase = (value: string) =>
   value.length > 0 && value[0] === value[0].toUpperCase();
@@ -87,7 +87,7 @@ export const schema = yup.object({
     }),
 });
 
-export const validateFormData = async (data: UncontrolledFormData) => {
+export const validateFormData = async (data: CustomFormData) => {
   // console.log("Validating form data:", data);
   try {
     await schema.validate(data, { abortEarly: false });

@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -8,37 +7,18 @@ import { RootState } from "@/shared/store/store";
 const links = [
   { to: "/uncontrolled-form", label: "Uncontrolled Form" },
   { to: "/react-hook-form", label: "React Hook Form" },
-  { to: "/about", label: "About" },
-  { to: "/404", label: "Not Found" },
+  // { to: "/about", label: "About" },
+  // { to: "/404", label: "Not Found" },
   { to: "/test", label: "test" },
 ];
 
-const freshData = 10; // sec
-
 export const Frontpage = () => {
-  // Получаем данные из Redux Store
   const uncontrolledFormData = useSelector(
     (state: RootState) => state.form.uncontrolledFormData,
   );
   const controlledFormData = useSelector(
     (state: RootState) => state.form.controlledFormData,
   );
-
-  // State для хранения времени последнего обновления
-  const [highlight, setHighlight] = useState<
-    "uncontrolled" | "controlled" | null
-  >(null);
-
-  useEffect(() => {
-    if (controlledFormData && controlledFormData.timestamp) {
-      const now = Date.now();
-      if (controlledFormData.timestamp > now - freshData * 1000) {
-        // проверяем, было ли обновление за последние 10 секунд
-        setHighlight("controlled");
-        setTimeout(() => setHighlight(null), freshData * 1000); // убираем выделение через 10 секунд
-      }
-    }
-  }, [controlledFormData]);
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-start bg-gray-100 p-4">
@@ -57,9 +37,7 @@ export const Frontpage = () => {
         ))}
       </div>
       <div className="m-2 flex w-full max-w-4xl flex-row justify-between gap-4 rounded-lg border-2 bg-white p-4 shadow-md">
-        <div
-          className={`w-full flex-1 p-4 ${highlight === "uncontrolled" ? "border-2 border-yellow-500 bg-yellow-100" : ""}`}
-        >
+        <div className="w-full flex-1 border-2 border-yellow-500 bg-yellow-50 p-4">
           <h3 className="mb-4 border-b-2 border-gray-300 pb-2 text-xl font-semibold">
             Uncontrolled Form Data
           </h3>
@@ -69,9 +47,7 @@ export const Frontpage = () => {
             <p>No uncontrolled form data available</p>
           )}
         </div>
-        <div
-          className={`w-full flex-1 p-4 ${highlight === "controlled" ? "border-2 border-green-500 bg-green-100" : ""}`}
-        >
+        <div className="w-full flex-1 border-2 border-yellow-500 bg-yellow-50 p-4">
           <h3 className="mb-4 border-b-2 border-gray-300 pb-2 text-xl font-semibold">
             Controlled Form Data
           </h3>

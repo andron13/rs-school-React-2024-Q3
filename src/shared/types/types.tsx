@@ -8,7 +8,7 @@ export type Country = {
   name: string;
 };
 
-export type UncontrolledFormData = {
+export type CustomFormData = {
   name: string;
   age?: number;
   email?: string;

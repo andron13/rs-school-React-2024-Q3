@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-import { Country, UncontrolledFormData } from "@/shared/types";
+import { Country, CustomFormData } from "@/shared/types";
 
 // image start
 
@@ -26,24 +26,24 @@ export const schema = yup.object({
       "Name must start with an uppercase letter",
       isFirstLetterUppercase,
     ),
-  image: yup
-    .mixed()
-    .required("Image is required")
-    .test("is-valid-type", "Image is not a valid image type", (value) => {
-      if (value && (value as File).type) {
-        return isValidFileType((value as File).type);
-      }
-      return false;
-    })
-    .test("is-valid-size", "Image max allowed size is 5MB", (value) => {
-      if (value && (value as File).size) {
-        return (value as File).size <= MAX_FILE_SIZE;
-      }
-      return false;
-    }),
+  // image: yup
+  //   .mixed()
+  //   .required("Image is required")
+  //   .test("is-valid-type", "Image is not a valid image type", (value) => {
+  //     if (value && (value as File).type) {
+  //       return isValidFileType((value as File).type);
+  //     }
+  //     return false;
+  //   })
+  //   .test("is-valid-size", "Image max allowed size is 5MB", (value) => {
+  //     if (value && (value as File).size) {
+  //       return (value as File).size <= MAX_FILE_SIZE;
+  //     }
+  //     return false;
+  //   }),
 });
 
-export const validateFormData = async (data: UncontrolledFormData) => {
+export const validateFormData = async (data: CustomFormData) => {
   console.log("Validating form data:", data);
   try {
     await schema.validate(data, { abortEarly: false });
