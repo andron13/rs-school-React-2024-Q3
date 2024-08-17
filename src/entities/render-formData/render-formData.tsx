@@ -9,7 +9,7 @@ interface RenderFormDataProps {
   data: FormDataInRedux;
 }
 
-const RenderFormData: FC<RenderFormDataProps> = ({ data }) => {
+export const RenderFormData: FC<RenderFormDataProps> = ({ data }) => {
   const [isFresh, setIsFresh] = useState(false);
 
   useEffect(() => {
@@ -89,5 +89,3 @@ const RenderFormData: FC<RenderFormDataProps> = ({ data }) => {
     </article>
   );
 };
-
-export default RenderFormData;

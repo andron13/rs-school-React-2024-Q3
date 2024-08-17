@@ -1,15 +1,12 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import RenderFormData from "@/entities/render-formData/render-formData.tsx";
+import { RenderFormData } from "@/entities";
 import { RootState } from "@/shared/store/store";
 
 const links = [
   { to: "/uncontrolled-form", label: "Uncontrolled Form" },
   { to: "/react-hook-form", label: "React Hook Form" },
-  // { to: "/about", label: "About" },
-  // { to: "/404", label: "Not Found" },
-  { to: "/test", label: "test" },
 ];
 
 export const Frontpage = () => {

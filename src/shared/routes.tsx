@@ -1,12 +1,10 @@
 import MainLayout from "@/features/main-layout";
 import {
-  About,
   Frontpage,
   NotFound404,
   ReactHookForm,
   UncontrolledForm,
 } from "@/pages";
-import { Test } from "@/pages/test/test.tsx";
 
 export const routes = [
   {
@@ -15,14 +13,6 @@ export const routes = [
       {
         path: "/",
         element: <Frontpage />,
-      },
-      {
-        path: "about",
-        element: <About />,
-      },
-      {
-        path: "test",
-        element: <Test />,
       },
       {
         path: "uncontrolled-form",

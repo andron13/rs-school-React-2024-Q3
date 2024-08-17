@@ -1,3 +1,3 @@
-export { TextInput } from "./uncontrolled-form/text-input.tsx";
+export { RenderFormData } from "./render-formData/render-formData.tsx";
 export { Header } from "./header";
 export { Footer } from "./footer";
