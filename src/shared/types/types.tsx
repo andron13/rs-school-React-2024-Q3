@@ -11,25 +11,25 @@ export type Country = {
 
 export type CustomFormData = {
   name: string;
-  age?: number;
-  email?: string;
-  password?: string;
-  confirmPassword?: string;
-  terms?: boolean;
-  gender?: Gender;
-  image?: File;
+  age: number;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  terms: boolean;
+  gender: Gender;
+  image: File;
   country?: Country;
 };
 
 export interface FormDataInRedux {
   name: string;
-  age?: number;
-  email?: string;
-  password?: string;
-  confirmPassword?: string;
-  gender?: string;
-  terms?: boolean;
-  image?: string; // base64
+  age: number;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  gender: string;
+  terms: boolean;
+  image: string; // base64
   country?: { code: string; name: string };
   timestamp?: number | null;
 }
