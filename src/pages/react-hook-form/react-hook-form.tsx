@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +13,7 @@ import { validateFormData } from "@/shared/validationSchema.ts";
 
 export const ReactHookForm = () => {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [isFormValid, setIsFormValid] = useState<boolean>(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const countries = useSelector((state: RootState) => selectCountries(state));
@@ -22,8 +23,19 @@ export const ReactHookForm = () => {
     handleSubmit,
     setError,
     clearErrors,
-    formState: { errors },
-  } = useForm<CustomFormData>();
+    formState: { errors, isValid },
+    watch,
+  } = useForm<CustomFormData>({
+    mode: "onChange",
+    criteriaMode: "all",
+    shouldFocusError: true,
+  });
+
+  const watchFields = watch();
+
+  useEffect(() => {
+    setIsFormValid(isValid);
+  }, [isValid, watchFields]);
 
   const onSubmit = async (data: CustomFormData) => {
     let imageBase64: string | undefined = undefined;
@@ -71,7 +83,6 @@ export const ReactHookForm = () => {
           setError("confirmPassword", { message: error });
         if (error.includes("terms")) setError("terms", { message: error });
         if (error.includes("Image")) setError("image", { message: error });
-        // Country doesn't need to be validated
         if (error.includes("Country")) setError("country", { message: error });
       });
       setSuccessMessage(null);
@@ -279,6 +290,30 @@ export const ReactHookForm = () => {
         )}
       </div>
       <div className="flex flex-col">
+        <div className="flex items-center gap-6">
+          <label htmlFor="terms" className="text-lg font-medium text-gray-800">
+            Accept Terms and Conditions
+          </label>
+          <Controller
+            name="terms"
+            control={control}
+            defaultValue={false}
+            render={({ field }) => (
+              <input
+                id="terms"
+                type="checkbox"
+                checked={field.value}
+                onChange={(e) => field.onChange(e.target.checked)}
+                className={`h-5 w-5 ${errors.terms ? "border-red-500" : ""}`}
+              />
+            )}
+          />
+        </div>
+        {errors.terms && (
+          <div className="form-error text-red-600">{errors.terms.message}</div>
+        )}
+      </div>
+      <div className="flex flex-col">
         <label
           htmlFor="country"
           className="mb-2 text-lg font-medium text-gray-800"
@@ -317,33 +352,12 @@ export const ReactHookForm = () => {
         )}
       </div>
 
-      <div className="flex flex-col">
-        <div className="flex items-center gap-6">
-          <label htmlFor="terms" className="text-lg font-medium text-gray-800">
-            Accept Terms and Conditions
-          </label>
-          <Controller
-            name="terms"
-            control={control}
-            defaultValue={false}
-            render={({ field }) => (
-              <input
-                id="terms"
-                type="checkbox"
-                checked={field.value}
-                onChange={(e) => field.onChange(e.target.checked)}
-                className={`h-5 w-5 ${errors.terms ? "border-red-500" : ""}`}
-              />
-            )}
-          />
-        </div>
-        {errors.terms && (
-          <div className="form-error text-red-600">{errors.terms.message}</div>
-        )}
-      </div>
-
-      <div>
-        <button type="submit" className="btn-submit btn-submit--enabled">
+      <div className="pt-5">
+        <button
+          type="submit"
+          className={`btn-submit ${isFormValid ? "btn-submit--enabled" : "btn-submit--disabled"}`}
+          disabled={!isFormValid}
+        >
           Submit
         </button>
       </div>
