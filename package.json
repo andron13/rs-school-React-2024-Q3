@@ -1,0 +1,78 @@
+{
+  "name": "react-forms",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "author": "andron13",
+  "homepage": "https://github.com/andron13/rs-school-React-2024-Q3/tree/forms#readme",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "lint:fix": "eslint --cache --fix .",
+    "format:fix": "prettier --write \"./**/*.{json,js,jsx,ts,tsx,css,md}\"",
+    "preview": "vite preview",
+    "tsc": "tsc -b",
+    "prepare": "husky",
+    "pre-commit": "lint-staged",
+    "update:check": "npx npm-check-updates",
+    "update": "npx npm-check-updates -u && npm install"
+  },
+  "dependencies": {
+    "@heroicons/react": "^2.1.5",
+    "@hookform/resolvers": "^3.9.0",
+    "@reduxjs/toolkit": "^2.2.7",
+    "@tailwindcss/forms": "^0.5.7",
+    "flowbite-react": "^0.10.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-hook-form": "^7.52.2",
+    "react-redux": "^9.1.2",
+    "react-router-dom": "^6.26.1",
+    "react-select": "^5.8.0",
+    "yup": "^1.4.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.9.0",
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "@types/node": "^22.4.0",
+    "@types/node-fetch": "^2.6.11",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@types/react-redux": "^7.1.33",
+    "@types/yup": "^0.32.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.20",
+    "clsx": "^2.1.1",
+    "eslint": "^9.9.0",
+    "eslint-config-prettier": "9.1.0",
+    "eslint-plugin-react": "^7.35.0",
+    "eslint-plugin-react-compiler": "^0.0.0-experimental-9aef357-20240815",
+    "eslint-plugin-react-hooks": "^5.1.0-rc.0",
+    "eslint-plugin-react-refresh": "^0.4.9",
+    "globals": "^15.9.0",
+    "husky": "^9.1.4",
+    "lint-staged": "^15.2.9",
+    "npm-check-updates": "^17.0.6",
+    "postcss": "^8.4.41",
+    "prettier": "^3.3.3",
+    "prettier-plugin-tailwindcss": "^0.6.6",
+    "tailwind-merge": "^2.5.2",
+    "tailwindcss": "^3.4.10",
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^8.1.0",
+    "vite": "^5.4.1"
+  },
+  "engines": {
+    "node": "^20.0.0"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": [
+      "npm run lint:fix",
+      "npm run format:fix"
+    ],
+    "**/*.{json,css,scss,md}": [
+      "npm run format:fix"
+    ]
+  }
+}
