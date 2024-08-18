@@ -31,7 +31,7 @@ export const RenderFormData: FC<RenderFormDataProps> = ({ data }) => {
 
   return (
     <article
-      className={`m-2 space-y-4 p-2 ${isFresh ? "border-4 border-green-500" : ""}`}
+      className={`m-2 border-2 p-4 ${isFresh ? "border-green-500" : "border-gray-300"} rounded-lg shadow-md`}
     >
       {data.name && (
         <p>
@@ -60,7 +60,7 @@ export const RenderFormData: FC<RenderFormDataProps> = ({ data }) => {
       )}
       {data.password !== undefined && (
         <p>
-          <strong>password:</strong> {data.password}
+          <strong>Password:</strong> {data.password}
         </p>
       )}
       {data.country && (
@@ -69,7 +69,7 @@ export const RenderFormData: FC<RenderFormDataProps> = ({ data }) => {
         </p>
       )}
       {data.image && (
-        <div>
+        <div className="mt-4">
           <strong>Image:</strong>
           <div className="mt-2">
             <img
@@ -80,12 +80,6 @@ export const RenderFormData: FC<RenderFormDataProps> = ({ data }) => {
           </div>
         </div>
       )}
-      {/*{data.timestamp && (*/}
-      {/*  <p>*/}
-      {/*    <strong>Timestamp:</strong>{" "}*/}
-      {/*    {new Date(data.timestamp).toLocaleString()}*/}
-      {/*  </p>*/}
-      {/*)}*/}
     </article>
   );
 };

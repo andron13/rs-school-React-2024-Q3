@@ -4,11 +4,9 @@ import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 
 import { fileToBase64, parseGender } from "@/shared/const";
-import {
-  RootState,
-  selectCountries,
-  setUncontrolledFormData,
-} from "@/shared/store";
+import { addUncontrolledFormData } from "@/shared/store/formSlice.ts";
+import { selectCountries } from "@/shared/store/selectors.ts";
+import { RootState } from "@/shared/store/store.ts";
 import {
   Country,
   CustomFormData,
@@ -73,7 +71,7 @@ export const UncontrolledForm = () => {
         timestamp: Date.now(),
       };
 
-      dispatch(setUncontrolledFormData(formDataForRedux));
+      dispatch(addUncontrolledFormData(formDataForRedux));
       setTimeout(() => {
         navigate("/");
       }, 700);

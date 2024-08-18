@@ -3,6 +3,7 @@ export enum Gender {
   Female = "female",
   Diverses = "diverses",
 }
+
 export type Country = {
   code: string;
   name: string;
@@ -34,7 +35,7 @@ export interface FormDataInRedux {
 }
 
 export interface FormState {
-  uncontrolledFormData: FormDataInRedux | null;
-  controlledFormData: FormDataInRedux | null;
+  uncontrolledFormData: FormDataInRedux[];
+  controlledFormData: FormDataInRedux[];
   countries: { code: string; name: string }[];
 }

@@ -2,7 +2,10 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { RenderFormData } from "@/entities";
-import { RootState } from "@/shared/store/store";
+import {
+  selectLastControlledFormData,
+  selectLastUncontrolledFormData,
+} from "@/shared/store/selectors.ts";
 
 const links = [
   { to: "/uncontrolled-form", label: "Uncontrolled Form" },
@@ -10,19 +13,15 @@ const links = [
 ];
 
 export const Frontpage = () => {
-  const uncontrolledFormData = useSelector(
-    (state: RootState) => state.form.uncontrolledFormData,
-  );
-  const controlledFormData = useSelector(
-    (state: RootState) => state.form.controlledFormData,
-  );
+  const lastUncontrolledFormData = useSelector(selectLastUncontrolledFormData);
+  const lastControlledFormData = useSelector(selectLastControlledFormData);
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-start bg-gray-100 p-4">
       <h2 className="mb-8 text-3xl font-bold text-gray-800">
         Welcome to the Frontpage
       </h2>
-      <div className="flex flex-col space-y-4">
+      <div className="mb-8 flex flex-col space-y-4">
         {links.map((link) => (
           <Link
             key={link.to}
@@ -33,23 +32,23 @@ export const Frontpage = () => {
           </Link>
         ))}
       </div>
-      <div className="m-2 flex w-full max-w-4xl flex-row justify-between gap-4 rounded-lg border-2 bg-white p-4 shadow-md">
-        <div className="w-full flex-1 border-2 border-yellow-500 bg-yellow-50 p-4">
+      <div className="flex w-full max-w-4xl gap-4">
+        <div className="flex-1 rounded-lg border-2 border-yellow-500 bg-yellow-50 p-4 shadow-md">
           <h3 className="mb-4 border-b-2 border-gray-300 pb-2 text-xl font-semibold">
             Uncontrolled Form Data
           </h3>
-          {uncontrolledFormData ? (
-            <RenderFormData data={uncontrolledFormData} />
+          {lastUncontrolledFormData ? (
+            <RenderFormData data={lastUncontrolledFormData} />
           ) : (
             <p>No uncontrolled form data available</p>
           )}
         </div>
-        <div className="w-full flex-1 border-2 border-yellow-500 bg-yellow-50 p-4">
+        <div className="flex-1 rounded-lg border-2 border-yellow-500 bg-yellow-50 p-4 shadow-md">
           <h3 className="mb-4 border-b-2 border-gray-300 pb-2 text-xl font-semibold">
             Controlled Form Data
           </h3>
-          {controlledFormData ? (
-            <RenderFormData data={controlledFormData} />
+          {lastControlledFormData ? (
+            <RenderFormData data={lastControlledFormData} />
           ) : (
             <p>No controlled form data available</p>
           )}

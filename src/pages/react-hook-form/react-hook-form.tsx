@@ -5,11 +5,9 @@ import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 
 import { fileToBase64 } from "@/shared/const";
-import {
-  RootState,
-  selectCountries,
-  setControlledFormData,
-} from "@/shared/store";
+import { addControlledFormData } from "@/shared/store/formSlice.ts";
+import { selectCountries } from "@/shared/store/selectors.ts";
+import { RootState } from "@/shared/store/store.ts";
 import { Country, CustomFormData, Gender } from "@/shared/types";
 import { validateFormData } from "@/shared/validationSchema.ts";
 
@@ -48,7 +46,7 @@ export const ReactHookForm = () => {
       setSuccessMessage("Form submitted successfully!");
 
       dispatch(
-        setControlledFormData({
+        addControlledFormData({
           ...data,
           gender: data.gender || "",
           image: imageBase64 || "",
